@@ -1,0 +1,33 @@
+{% load static %}
+
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Project</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+	</head>
+	<body class="is-preload">
+		<!-- Header -->
+			<header id="header">
+				<h1>{{title}}</h1>
+				<p>Date: {{date}}<br>Location: {{location}}<br>Points: {{points}}</p>
+			</header>
+
+		<!-- Signup Form -->
+			<form id="signup-form" method="POST" action="{% url 'edit_events' id %}">
+				<input type="text" name="username" id="username" placeholder="Attendee Username" />
+				<input type="submit" value="Add" />
+				{% csrf_token %}
+			</form>
+			<p style="color:#ffffff">{{message}}</p>
+		<!-- Footer -->
+			<footer id="footer">
+				<ul class="icons">
+					Logged in as {{user}}
+				</ul>
+			</footer>
+
+	</body>
+</html>
