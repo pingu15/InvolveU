@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 from rest_framework import routers
 
 from .views import UserViewSet, EventViewSet
@@ -29,4 +32,4 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('events/', include('models.urls')),
     path("signup/", include('accounts.urls')),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
