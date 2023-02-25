@@ -1,12 +1,12 @@
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import Navigator from './navigation/Navigator';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>InvolveU</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Navigator />
   );
 }
 
