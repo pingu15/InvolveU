@@ -4,6 +4,8 @@ Involve U is a mobile app written in React Native that allows students to see up
 
 Teachers in the school are tasked with adding students by username to each event to ensure validity.
 
+The initial app design can be found at https://www.figma.com/file/204M6ZpTg2ZjOxQPPir3OP/InvolveU?node-id=0%3A1.
+
 ## Api
 
 The api can be found at https://involeu.up.railway.app/api. Admins (teachers) can access the admin panel at https://involeu.up.railway.app/admin.
