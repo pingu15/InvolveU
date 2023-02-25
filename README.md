@@ -1,6 +1,6 @@
 # InvoleU
 
-Involve U is a mobile app written in React Native that allows students to see upcoming school events. If attended, students are awarded points and the student from each grade with the most points after every school quarter is awarded a prize corresponding to the number of points the student has.
+InvolveU is a mobile app written in React Native that allows students to see upcoming school events. If attended, students are awarded points and the student from each grade with the most points after every school quarter is awarded a prize corresponding to the number of points the student has.
 
 Teachers in the school are tasked with adding students by username to each event to ensure validity.
 
