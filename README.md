@@ -21,7 +21,7 @@ To run the app, clone the repository and enter the `app/` directory.
 First run:
 
 ```
-npm install --legacy-peer-deps --include-dev
+npm i
 ```
 
 Using expo, run:
