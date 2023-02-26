@@ -14,8 +14,8 @@ The api can be found at https://involeu.up.railway.app/api. Admins (teachers) ca
 
 Prerequisites:
 
-- Node.js v[enter version]
-- npm v[enter version]
+- Node.js v8
+- npm v16
 - expo-cli and turtle-cli (can be installed with `npm install -g expo-cli turtle-cli`)
 
 To run the app, clone the repository and enter the `app/` directory.
