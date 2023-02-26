@@ -1,7 +1,5 @@
 from rest_framework import viewsets
 
-from django.shortcuts import render
-
 from .serializers import UserSerializer, EventSerializer
 from accounts.models import User
 from models.models import Event
