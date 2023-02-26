@@ -161,9 +161,4 @@ const styles = StyleSheet.create({
   togglecontent: {
     marginTop: "8%",
   },
-  text: {
-    fontSize: 20,
-    fontWeight: "bold",
-    marginBottom: 10,
-  },
 });
