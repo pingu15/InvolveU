@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 
 export default function EventsScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Events Screen</Text>
+      
+      <Calendar />
     </View>
   );
 }

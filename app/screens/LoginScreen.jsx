@@ -79,7 +79,7 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome!</Text>
+      <Text style={styles.title}>Log In</Text>
       <TextInput
         style={styles.input}
         placeholder="Username"
