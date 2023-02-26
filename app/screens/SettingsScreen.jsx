@@ -84,8 +84,9 @@ function TermsButton() {
 
 export default function SettingsScreen({ navigation }) {
   const handleLogout = () => {
-    AsyncStorage.clear();
-    navigation.navigate("Login");
+    AsyncStorage.clear().then(() => {
+      navigation.navigate("Login");
+    });
   };
 
   return (

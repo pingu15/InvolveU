@@ -10,6 +10,14 @@ import {
 } from "react-native";
 
 export default function LoginScreen({ navigation }) {
+  AsyncStorage.getItem("@username").then((user) => {
+    if (user != null) {
+      console.log(user);
+      navigation.navigate("TabNav");
+      return;
+    }
+  });
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginText, updateLoginText] = useState("");
@@ -49,9 +57,9 @@ export default function LoginScreen({ navigation }) {
         .then((response) => response.json())
         .then((json) => {
           if (json.access && json.refresh) {
-            AsyncStorage.setItem("accesstoken", json.access)
+            AsyncStorage.setItem("@accesstoken", json.access)
               .then(() => {
-                AsyncStorage.setItem("refreshtoken", json.refresh)
+                AsyncStorage.setItem("@refreshtoken", json.refresh)
                   .then(() => {
                     resolve("Success!");
                   })
