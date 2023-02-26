@@ -13,7 +13,6 @@ def signup(request):
         password = request.POST['password']
         password2 = request.POST['password2']
         grade = request.POST['grade']
-        print(grade)
         if password == password2:
             User.objects.create_user(email, username, password, grade)
         else:

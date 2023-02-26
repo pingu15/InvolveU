@@ -18,18 +18,21 @@ from django.urls import path, include
 
 from django.conf import settings
 from django.conf.urls.static import static
-from django.urls import include, path, re_path
-from django.views.static import serve
+from django.urls import include, path
 
 from rest_framework import routers
 
-from .views import UserViewSet, EventViewSet
+from .views import UserViewSet, EventViewSet, MyTokenObtainPairView
+
+from rest_framework_simplejwt.views import TokenRefreshView
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'events', EventViewSet)
 
 urlpatterns = [
+    path('api/token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('events/', include('models.urls')),

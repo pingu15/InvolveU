@@ -7,6 +7,10 @@ import * as SplashScreen from 'expo-splash-screen';
 SplashScreen.preventAutoHideAsync();
 
 export default function HomeScreen() {
+<<<<<<< HEAD
+=======
+  
+>>>>>>> 7631a6a1ae7ff49dadd2c01c5e660f4817bdeece
   return (
       <View style={styles.container}>
           <Summary/>
