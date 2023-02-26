@@ -4,9 +4,9 @@ import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Linking } from 'r
 function Profile() {
   return (
     <View style={styles.profile}>
-    <Text style={{fontSize: 20, fontWeight: 'bold', color: '#000000', marginHorizontal: '7%', marginTop: '6%', marginBottom: '3%'}}>Noob Wong</Text>
-    <Text style={{fontSize: 12, color: '#a6a6a6', marginHorizontal: '7%', marginBottom: '6%'}}>username</Text>
-  </View>
+      <Text style={{fontSize: 20, fontWeight: 'bold', color: '#000000', marginHorizontal: '7%', marginTop: '6%', marginBottom: '3%'}}>Noob Wong</Text>
+      <Text style={{fontSize: 12, color: '#a6a6a6', marginHorizontal: '7%', marginBottom: '6%'}}>username</Text>
+    </View>
   );
 }
 
@@ -83,7 +83,6 @@ export default function SettingsScreen({ navigation }) {
 const styles = StyleSheet.create({
   bottombuttonscontainer: {
     width: '85%',
-    marginBottom: '8%',
     overflow: 'hidden',
   },
   bottombutton: {
