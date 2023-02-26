@@ -1,8 +1,10 @@
 # InvoleU
 
-Involve U is a mobile app written in React Native that allows students to see upcoming school events. If attended, students are awarded points and the student from each grade with the most points after every school quarter is awarded a prize corresponding to the number of points the student has.
+InvolveU is a mobile app written in React Native that allows students to see upcoming school events. If attended, students are awarded points and the student from each grade with the most points after every school quarter is awarded a prize corresponding to the number of points the student has.
 
-Teachers in the school are tasked with adding students by username to each event to ensure validity.
+Teachers in the school are tasked with adding students by username at each event to ensure validity.
+
+The initial app design can be found at https://www.figma.com/file/204M6ZpTg2ZjOxQPPir3OP/InvolveU?node-id=0%3A1.
 
 ## Api
 
@@ -12,8 +14,8 @@ The api can be found at https://involeu.up.railway.app/api. Admins (teachers) ca
 
 Prerequisites:
 
-- Node.js v[enter version]
-- npm v[enter version]
+- Node.js v8
+- npm v16
 - expo-cli and turtle-cli (can be installed with `npm install -g expo-cli turtle-cli`)
 
 To run the app, clone the repository and enter the `app/` directory.
@@ -21,7 +23,7 @@ To run the app, clone the repository and enter the `app/` directory.
 First run:
 
 ```
-npm install --legacy-peer-deps --include-dev
+npm i
 ```
 
 Using expo, run:
