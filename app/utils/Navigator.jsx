@@ -26,7 +26,7 @@ function TabNav({navigation}) {
 export default function Navigator() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Login" component={LoginScreen} options={{headerShown: false}} />
       <Stack.Screen
         name="TabNav"
         options={{ headerShown: false, gestureEnabled: false }}>
