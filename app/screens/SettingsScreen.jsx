@@ -9,7 +9,7 @@ import {
   Linking,
 } from "react-native";
 
-function Profile({ username }) {
+function Profile({ user }) {
   return (
     <View style={styles.profile}>
       <Text
@@ -22,7 +22,7 @@ function Profile({ username }) {
           marginBottom: "3%",
         }}
       >
-        Noob Wong
+        {user.email == "" ? "Admin Account" : user.email}
       </Text>
       <Text
         style={{
@@ -32,7 +32,7 @@ function Profile({ username }) {
           marginBottom: "6%",
         }}
       >
-        {username}
+        {user.username}
       </Text>
     </View>
   );
@@ -84,12 +84,12 @@ function TermsButton() {
 
 export default function SettingsScreen({ navigation }) {
 
-  const [username, setUsername] = useState('username');
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     AsyncStorage.getItem('@user').then((user) => {
-      user = JSON.parse(user);
-      setUsername(user.username);
+      console.log(user);
+      setUser(JSON.parse(user));
     }).catch((error) => {
       console.log(error.message);
     });
@@ -105,7 +105,7 @@ export default function SettingsScreen({ navigation }) {
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.overview}>
-          <Profile username={username}/>
+          <Profile user={user}/>
           <Separator />
 
           <View style={styles.togglecontentcontainer}>
