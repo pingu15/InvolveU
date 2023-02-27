@@ -10,10 +10,11 @@
 		<link rel="stylesheet" type="text/css" href="{% static 'assets/css/main.css' %}" />
 	</head>
 	<body class="is-preload">
+        
 		<form action="{% url 'signup' %}" method="POST" >
             {% csrf_token %}
             <h1>Sign Up</h1>
-
+            {% if not redirect %}
             <label for="email">Email</label>
             <input type="email" placeholder="Enter your Email" id="email" name="email"required>
 
@@ -37,6 +38,9 @@
               </select>
     
             <button>Sign Up</button>
+            {% else %}
+            <label for="email">{{message}}</label>
+            {% endif %}
         </form>
 
 	</body>
