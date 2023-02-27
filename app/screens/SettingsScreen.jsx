@@ -22,7 +22,7 @@ function Profile({ user }) {
           marginBottom: "3%",
         }}
       >
-        {user.email == "" ? "Admin Account" : user.email}
+        {user.username}
       </Text>
       <Text
         style={{
@@ -32,7 +32,7 @@ function Profile({ user }) {
           marginBottom: "6%",
         }}
       >
-        {user.username}
+        {user.email == "" ? "Admin Account" : user.email}
       </Text>
     </View>
   );
