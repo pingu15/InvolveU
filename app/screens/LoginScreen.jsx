@@ -13,7 +13,7 @@ import {
 export default function LoginScreen({ navigation }) {
   AsyncStorage.getItem("@username").then((user) => {
     if (user != null) {
-      console.log(user);
+      console.log("user:" + user);
       navigation.navigate("TabNav");
       return;
     }
@@ -31,10 +31,23 @@ export default function LoginScreen({ navigation }) {
     login()
       .then((val) => {
         if (val == "Success!") {
+          AsyncStorage.setItem("@username", username);
           updateLoginText(val + " Loading App...");
           loggingIn = false;
           updateLoginText("");
-          GetUsers();
+          GetUsers().then((users) => {
+            AsyncStorage.setItem("@users", JSON.stringify(users));
+            users.forEach((user) => {
+              if (user.username == username) {
+                console.log(user);
+                AsyncStorage.setItem("@user", JSON.stringify(user));
+              }
+            });
+          });
+          // loop thru users
+          // if the user is equal to the username then add the user profile to asyncstorage
+
+
           navigation.navigate("TabNav");
         } else {
           updateLoginText(val);
