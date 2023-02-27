@@ -6,7 +6,7 @@ from models.models import Event
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'staff', 'points', 'grade')
+        fields = ('id', 'username', 'staff', 'points', 'grade', 'email')
 
 
 class EventSerializer(serializers.ModelSerializer):
