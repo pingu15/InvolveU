@@ -4,13 +4,23 @@ import Welcomeicon from '../assets/welcomeIcon.png';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 
-SplashScreen.preventAutoHideAsync();
+//SplashScreen.preventAutoHideAsync();
 
 export default function HomeScreen() {
-<<<<<<< HEAD
-=======
-  
->>>>>>> 7631a6a1ae7ff49dadd2c01c5e660f4817bdeece
+  // const [fontsLoaded] = useFonts({
+  //   'Inter': require('../assets/inter-regular-1.ttf'),
+  // });
+
+  // const onLayoutRootView = useCallback(async () => {
+  //   if (fontsLoaded) {
+  //     await SplashScreen.hideAsync();
+  //   }
+  // }, [fontsLoaded]);
+
+  // if (!fontsLoaded) {
+  //   return null;
+  // }
+
   return (
       <View style={styles.container}>
           <Summary/>
@@ -38,7 +48,6 @@ function Rank(){
 
 const styles = StyleSheet.create({
   h1: {
-    fontFamily: 'poppins',
     fontSize: 25,
     fontWeight: 'bold',
     marginBottom: 10,

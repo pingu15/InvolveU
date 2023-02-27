@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   View,
@@ -9,7 +9,7 @@ import {
   Linking,
 } from "react-native";
 
-function Profile() {
+function Profile({ user }) {
   return (
     <View style={styles.profile}>
       <Text
@@ -22,7 +22,7 @@ function Profile() {
           marginBottom: "3%",
         }}
       >
-        Noob Wong
+        {user.username}
       </Text>
       <Text
         style={{
@@ -32,7 +32,7 @@ function Profile() {
           marginBottom: "6%",
         }}
       >
-        username
+        {user.email == "" ? "Admin Account" : user.email}
       </Text>
     </View>
   );
@@ -83,6 +83,18 @@ function TermsButton() {
 }
 
 export default function SettingsScreen({ navigation }) {
+
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    AsyncStorage.getItem('@user').then((user) => {
+      console.log(user);
+      setUser(JSON.parse(user));
+    }).catch((error) => {
+      console.log(error.message);
+    });
+  }, []);
+
   const handleLogout = () => {
     AsyncStorage.clear().then(() => {
       navigation.navigate("Login");
@@ -93,7 +105,7 @@ export default function SettingsScreen({ navigation }) {
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.overview}>
-          <Profile />
+          <Profile user={user}/>
           <Separator />
 
           <View style={styles.togglecontentcontainer}>
@@ -146,6 +158,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "flex-start",
     alignItems: "center",
+    alignSelf: "center",
   },
   profile: {
     margin: "8%",
