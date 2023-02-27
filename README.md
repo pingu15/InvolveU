@@ -1,4 +1,4 @@
-# InvoleU
+# InvolveU
 
 InvolveU is a mobile app written in React Native that allows students to see upcoming school events. If attended, students are awarded points and the student from each grade with the most points after every school quarter is awarded a prize corresponding to the number of points the student has.
 
@@ -8,7 +8,7 @@ The initial app design can be found at https://www.figma.com/file/204M6ZpTg2ZjOx
 
 ## Api
 
-The api can be found at https://involeu.up.railway.app/api. Admins (teachers) can access the admin panel at https://involeu.up.railway.app/admin.
+The api can be found at https://involveu.up.railway.app/api. Admins (teachers) can access the admin panel at https://involveu.up.railway.app/admin.
 
 ## App
 
