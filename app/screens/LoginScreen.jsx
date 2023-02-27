@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import config from "../config.json";
+import { GetUsers } from "../utils/InvolveUApi";
 import {
   StyleSheet,
   View,
@@ -33,6 +34,7 @@ export default function LoginScreen({ navigation }) {
           updateLoginText(val + " Loading App...");
           loggingIn = false;
           updateLoginText("");
+          GetUsers();
           navigation.navigate("TabNav");
         } else {
           updateLoginText(val);

@@ -126,9 +126,9 @@ export default function SettingsScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   bottombuttonscontainer: {
-    width: "85%",
-    marginBottom: "8%",
-    overflow: "hidden",
+    width: '85%',
+    marginBottom: '8%',
+    overflow: 'hidden',
   },
   bottombutton: {
     marginTop: "8%",
@@ -161,10 +161,5 @@ const styles = StyleSheet.create({
   },
   togglecontent: {
     marginTop: "8%",
-  },
-  text: {
-    fontSize: 20,
-    fontWeight: "bold",
-    marginBottom: 10,
   },
 });
