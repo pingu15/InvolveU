@@ -70,3 +70,60 @@ function Rank(){
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  h1: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: '#1D1E25',
+    borderTopWidth: 20,
+  },
+  text: {
+    fontSize: 14,
+    fontWeight: 'normal',
+    color: '#808d9e',
+    marginLeft: '5%',
+  },
+  number1: {
+    fontSize: 60,
+    fontWeight: 'bold',
+    color: '#1D1E25',
+    marginLeft: '5%'
+  },
+  number2: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#808d9e',
+    marginTop: '8%',
+    marginLeft: '5%',
+  },
+  percent: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    color: '#009c35',
+    marginTop: '7%',
+    marginLeft: '0%'
+  },
+  container: {
+    flexGrow: 1,
+    backgroundColor: '#fafafa',
+  },
+  box: {
+    margin: '5%',
+    width: '90%',
+    borderRadius: 8,
+    backgroundColor: '#ffffff',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'left',
+  },
+  row: {
+    flexDirection: 'row',
+  },
+  icon: {
+    height: 36,
+    width: 36,
+    margin: 15
+  }
+});
