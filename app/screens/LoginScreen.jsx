@@ -139,7 +139,7 @@ export default function LoginScreen({ navigation }) {
         
         <View style={{flexDirection: "row", alignSelf: "center", margin: "10%"}}>
           <Text style={{ textAlign: 'center' }}>New user?{' '}</Text>
-          <TouchableOpacity onPress={() => {Linking.openURL("https://involveu.up.railway.app/signup/");}}>
+          <TouchableOpacity onPress={() => {navigation.navigate("Signup")}}>
             <Text style={{ color: '#2280ff', fontWeight: "bold" }}>Sign up here</Text>
           </TouchableOpacity>
         </View>

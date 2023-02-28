@@ -18,7 +18,8 @@
     "expo-status-bar": "~1.4.4",
     "react": "18.2.0",
     "react-native": "0.71.3",
-    "react-native-calendars": "^1.1293.0"
+    "react-native-calendars": "^1.1293.0",
+    "react-native-select-dropdown": "^3.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
