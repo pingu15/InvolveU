@@ -9,6 +9,9 @@ import {
   Linking,
 } from "react-native";
 
+import { logout } from "../utils/ReduxStore";
+import { useSelector, useDispatch } from 'react-redux';
+
 function Profile({ user }) {
   return (
     <View style={styles.profile}>
@@ -84,18 +87,11 @@ function TermsButton() {
 
 export default function SettingsScreen({ navigation }) {
 
-  const [user, setUser] = useState({username: "Loading", email: "Loading"});
-
-  useEffect(() => {
-    AsyncStorage.getItem('@user').then((user) => {
-      console.log(user);
-      setUser(JSON.parse(user));
-    }).catch((error) => {
-      console.log(error.message);
-    });
-  }, []);
+  const user = useSelector(state => state.userData);
+  const dispatch = useDispatch();
 
   const handleLogout = () => {
+    dispatch(logout());
     AsyncStorage.clear().then(() => {
       navigation.navigate("Login");
     });

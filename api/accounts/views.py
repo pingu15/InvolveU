@@ -15,9 +15,11 @@ def signup(request):
         password = data['password']
         password2 = data['password2']
         grade = data['grade']
-        if password == password2:
+        if User.objects.filter(username=username).first():
+            message['message'] = "User with username already exists."
+        elif password and (password == password2):
             User.objects.create_user(email, username, password, grade)
-            message['message'] = "Sign Up successful, return to app to login."
+            message['message'] = "Success!"
             message['success'] = True
         else:
             message['message'] = "passwords do not match"
