@@ -7,7 +7,7 @@ from .models import User
 
 
 def signup(request):
-    message = {"message": ""}
+    message = {"message": "", "success": False}
     if request.method == "POST":
         data = json.loads(request.body)
         email = data['email']
@@ -18,6 +18,7 @@ def signup(request):
         if password == password2:
             User.objects.create_user(email, username, password, grade)
             message['message'] = "Sign Up successful, return to app to login."
+            message['success'] = True
         else:
             message['message'] = "passwords do not match"
     return JsonResponse(message)
