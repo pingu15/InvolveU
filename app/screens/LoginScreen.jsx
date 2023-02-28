@@ -8,6 +8,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  Linking
 } from "react-native";
 
 export default function LoginScreen({ navigation }) {
@@ -23,7 +24,6 @@ export default function LoginScreen({ navigation }) {
   const [password, setPassword] = useState("");
   const [loginText, updateLoginText] = useState("");
   let loggingIn = false;
-  let error = false;
 
   const handleLogin = () => {
     if (loggingIn) return;
@@ -35,21 +35,21 @@ export default function LoginScreen({ navigation }) {
           AsyncStorage.setItem("@username", username);
           updateLoginText(val + " Loading App...");
           loggingIn = false;
-          error = false;
           updateLoginText("");
           GetUsers().then((users) => {
             AsyncStorage.setItem("@users", JSON.stringify(users));
+            console.log("list of users:" + JSON.stringify(users));
             users.forEach((user) => {
               if (user.username == username) {
-                console.log(user);
-                AsyncStorage.setItem("@user", JSON.stringify(user));
+                console.log("user found in list: " + JSON.stringify(user));
+                AsyncStorage.setItem("@user", JSON.stringify(user)).then(() => {
+                  navigation.navigate("TabNav");
+                });
               }
             });
           });
-          navigation.navigate("TabNav");
         } else {
           updateLoginText(val);
-          error = true;
           loggingIn = false;
         }
       })
@@ -87,9 +87,9 @@ export default function LoginScreen({ navigation }) {
                 resolve("Error occurred. Was storage permission denied?");
               });
           } else if (json.detail) {
-            resolve("Username or password incorrect");
+            resolve("Username or password incorrect.");
           } else {
-            resolve("Something went wrong. Please try again later.");
+            resolve("Something went wrong. Please try again.");
           }
         })
         .catch((err) => {
@@ -105,7 +105,7 @@ export default function LoginScreen({ navigation }) {
         <Text style={{
           fontSize: 30,
           fontWeight: "bold",
-          marginBottom: 14,
+          marginBottom: 10,
         }}>Welcome Back!</Text>
               <Text style={{
           fontSize: 14,
@@ -131,13 +131,18 @@ export default function LoginScreen({ navigation }) {
           onChangeText={setPassword}
         />
       </View>
-      
+      <Text style={styles.loginText}>{loginText}</Text>
       <View style={styles.bottomcontainer}>
         <TouchableOpacity style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
-        <Text style={[styles.loginText, {color: error ? "#ff0000" : "#000"}]}>{loginText}</Text>
-        <Text style={{alignSelf: "center", margin: "8%"}}>New user? Sign up here</Text>
+        
+        <View style={{flexDirection: "row", alignSelf: "center", margin: "10%"}}>
+          <Text style={{ textAlign: 'center' }}>New user?{' '}</Text>
+          <TouchableOpacity onPress={() => {Linking.openURL("https://involveu.up.railway.app/signup/");}}>
+            <Text style={{ color: '#2280ff', fontWeight: "bold" }}>Sign up here</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );

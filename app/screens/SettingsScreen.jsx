@@ -32,7 +32,7 @@ function Profile({ user }) {
           marginBottom: "6%",
         }}
       >
-        {user.email == "" ? "Admin Account" : user.email}
+        {user.email == "" ? "No Email" : user.email}
       </Text>
     </View>
   );
@@ -84,7 +84,7 @@ function TermsButton() {
 
 export default function SettingsScreen({ navigation }) {
 
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({username: "Loading", email: "Loading"});
 
   useEffect(() => {
     AsyncStorage.getItem('@user').then((user) => {
