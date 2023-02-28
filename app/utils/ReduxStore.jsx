@@ -21,10 +21,14 @@ const mainSlice = createSlice({
     setEventsData: (state, action) => {
         state.eventsData = action.payload
     },
+    logout: (state) => {
+        state.username = ''
+        state.userData = {}
+    }
   }
 })
 
-export const { setUsername, setUsersData, setUserData, setEventsData } = mainSlice.actions
+export const { setUsername, setUsersData, setUserData, setEventsData, logout } = mainSlice.actions
 
 const store = configureStore({
   reducer: mainSlice.reducer

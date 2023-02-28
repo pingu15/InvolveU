@@ -8,7 +8,9 @@ import {
   TouchableOpacity,
   Linking,
 } from "react-native";
-import { useSelector } from 'react-redux';
+
+import { logout } from "../utils/ReduxStore";
+import { useSelector, useDispatch } from 'react-redux';
 
 function Profile({ user }) {
   return (
@@ -86,8 +88,10 @@ function TermsButton() {
 export default function SettingsScreen({ navigation }) {
 
   const user = useSelector(state => state.userData);
+  const dispatch = useDispatch();
 
   const handleLogout = () => {
+    dispatch(logout());
     AsyncStorage.clear().then(() => {
       navigation.navigate("Login");
     });
