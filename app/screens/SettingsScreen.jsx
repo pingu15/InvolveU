@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Linking,
 } from "react-native";
+import { useSelector } from 'react-redux';
 
 function Profile({ user }) {
   return (
@@ -84,16 +85,7 @@ function TermsButton() {
 
 export default function SettingsScreen({ navigation }) {
 
-  const [user, setUser] = useState({username: "Loading", email: "Loading"});
-
-  useEffect(() => {
-    AsyncStorage.getItem('@user').then((user) => {
-      console.log(user);
-      setUser(JSON.parse(user));
-    }).catch((error) => {
-      console.log(error.message);
-    });
-  }, []);
+  const user = useSelector(state => state.userData);
 
   const handleLogout = () => {
     AsyncStorage.clear().then(() => {

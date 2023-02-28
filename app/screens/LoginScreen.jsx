@@ -11,19 +11,33 @@ import {
   Linking
 } from "react-native";
 
+import { useDispatch } from "react-redux";
+import { setUsername as setReduxUsername, setUsersData, setUserData, setEventsData } from "../utils/ReduxStore";
+
 export default function LoginScreen({ navigation }) {
-  AsyncStorage.getItem("@username").then((user) => {
-    if (user != null) {
-      console.log("user:" + user);
-      navigation.navigate("TabNav");
-      return;
-    }
-  });
+
+  const dispatch = useDispatch();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginText, updateLoginText] = useState("");
   let loggingIn = false;
+
+  AsyncStorage.getItem("@username").then((username) => {
+    if (username != null) {
+      dispatch(setReduxUsername(username));
+      GetUsers().then((users) => {
+        dispatch(setUsersData(users));
+        users.forEach((user) => {
+          if (user.username == username) {
+            dispatch(setUserData(user));
+          }
+        });
+      });
+      navigation.navigate("TabNav");
+      return;
+    }
+  });
 
   const handleLogin = () => {
     if (loggingIn) return;
@@ -33,21 +47,22 @@ export default function LoginScreen({ navigation }) {
       .then((val) => {
         if (val == "Success!") {
           AsyncStorage.setItem("@username", username);
+          dispatch(setReduxUsername(username));
+
           updateLoginText(val + " Loading App...");
           loggingIn = false;
           updateLoginText("");
           GetUsers().then((users) => {
             AsyncStorage.setItem("@users", JSON.stringify(users));
-            console.log("list of users:" + JSON.stringify(users));
+            dispatch(setUsersData(users));
             users.forEach((user) => {
               if (user.username == username) {
-                console.log("user found in list: " + JSON.stringify(user));
-                AsyncStorage.setItem("@user", JSON.stringify(user)).then(() => {
-                  navigation.navigate("TabNav");
-                });
+                AsyncStorage.setItem("@user", JSON.stringify(users));
+                dispatch(setUserData(user));
               }
             });
           });
+          navigation.navigate("TabNav");
         } else {
           updateLoginText(val);
           loggingIn = false;
