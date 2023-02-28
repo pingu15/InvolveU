@@ -8,6 +8,7 @@ import UpArrow from '../assets/upArrow.png';
 
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import { useSelector } from 'react-redux';
 
 //SplashScreen.preventAutoHideAsync();
 
@@ -26,20 +27,7 @@ export default function HomeScreen() {
     return null;
   }*/
 
-  const [user, setUser] = useState({username:"Loading", points: "Loading", rank: "Loading", grade: "Loading"});
-
-  useEffect(() => {
-    AsyncStorage.getItem('@user').then((user) => {
-      if (user == null) {
-        console.log("user is null");
-      } else {
-        console.log("Recieved data to homescreen:" + user);
-        setUser(JSON.parse(user));
-      }
-    }).catch((error) => {
-      console.log(error.message);
-    });
-  }, [user]);
+  const user = useSelector(state => state.userData);
 
   return (
       <View style={styles.container}>
