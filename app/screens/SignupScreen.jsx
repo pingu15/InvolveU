@@ -10,7 +10,6 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  Linking,
 } from "react-native";
 
 export default function SignupScreen({ navigation }) {
@@ -78,7 +77,6 @@ export default function SignupScreen({ navigation }) {
         .then((response) => response.json())
         .then((json) => {
           if (json.success) {
-            console.log("signed up");
             resolve(login());
           } else {
             resolve(json.message);
