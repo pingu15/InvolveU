@@ -12,7 +12,7 @@ import { useSelector } from 'react-redux';
 
 //SplashScreen.preventAutoHideAsync();
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   /*const [fontsLoaded] = useFonts({
     'Inter': require('../assets/inter-regular-1.ttf'),
   });
