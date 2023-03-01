@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import Http404
+from django.http import Http404, FileResponse
 from django.core.exceptions import PermissionDenied
 
 from .models import Event
@@ -38,3 +38,8 @@ def edit_events(request, id):
                 message = "User Already Added"
         context["message"] = message
     return render(request, "index.html", context)
+
+
+def items_view(request, photo_name):
+    img = open('static/photos/'+photo_name, 'rb')
+    return FileResponse(img)
