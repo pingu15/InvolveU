@@ -1,4 +1,5 @@
-from django.shortcuts import render
+import json
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -6,15 +7,20 @@ from .models import User
 
 
 def signup(request):
-    message = {"message": ""}
+    message = {"message": "", "success": False}
     if request.method == "POST":
-        email = request.POST['email']
-        username = request.POST['username']
-        password = request.POST['password']
-        password2 = request.POST['password2']
-        grade = request.POST['grade']
-        if password == password2:
+        data = json.loads(request.body)
+        email = data['email']
+        username = data['username']
+        password = data['password']
+        password2 = data['password2']
+        grade = data['grade']
+        if User.objects.filter(username=username).first():
+            message['message'] = "User with username already exists."
+        elif password and (password == password2):
             User.objects.create_user(email, username, password, grade)
+            message['message'] = "Success!"
+            message['success'] = True
         else:
             message['message'] = "passwords do not match"
-    return render(request, "signup.html", message)
+    return JsonResponse(message)

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, ScrollView} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, Image} from 'react-native';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 /* image imports */
 import Welcomeicon from '../assets/welcomeIcon.png';
 import RankIcon from '../assets/rankIcon.png';
@@ -8,6 +9,7 @@ import StoreIcon from '../assets/storeIcon.png';
 
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import { useSelector } from 'react-redux';
 
 //SplashScreen.preventAutoHideAsync();
 
@@ -26,27 +28,29 @@ export default function HomeScreen() {
     return null;
   }*/
 
+  const user = useSelector(state => state.userData);
+
   return (
     <View style = {styles.container}>
       <ScrollView contentContainerStyle={[styles.container, {paddingBottom: 500}]}>
-          <Summary/>
-          <Rank/>
+          <Summary user = {user}/>
+          <Rank user = {user}/>
           <Store/>
       </ScrollView>
     </View>
   );
 }
 
-function Summary() {
+function Summary({ user }) {
   return(
     <View style={[styles.box, {height: '35%'}]}>
       <View style = {styles.row}>
         <Image style = {styles.icon} source={Welcomeicon}/>
-        <Text style={styles.h1}>Welcome, MaxBad!</Text>
+        <Text style={styles.h1}>Welcome, {user.username}!</Text>
       </View>
       <Text style = {styles.text}>Total Points:</Text>
       <View style = {[styles.row, {marginTop: '5%'}]}>
-        <Text style = {styles.number1}>1560</Text>
+        <Text style = {styles.number1}>{user.points}</Text>
         <Image style = {[styles.icon, {marginRight: '0%'}, {marginTop: '6%'}]} source = {UpArrow}/>
         <Text style = {styles.percent}>25%</Text>
       </View>
@@ -54,19 +58,19 @@ function Summary() {
   );
 }
 
-function Rank(){
+function Rank({user}){
   return(
     <View style = {[styles.box, {height: '50%'}, {marginTop: '0%'}]}>
       <View style = {styles.row}>
         <Image style = {styles.icon} source={RankIcon}/>
         <Text style={styles.h1}>Rank</Text>
       </View>
-      <Text style = {styles.text}>Among Grade grades:</Text>
+      <Text style = {styles.text}>Among grade {user.grade}s:</Text>
       <View style = {[styles.row, {marginTop: '3%'}]}>
         <Text style = {styles.number1}>6</Text>
         <Text style = {styles.number2}>of 247</Text>
       </View>
-      <Text style = {styles.text}>Among Grade grades:</Text>
+      <Text style = {styles.text}>Among all grades:</Text>
       <View style = {[styles.row, {marginTop: '3%'}]}>
         <Text style = {styles.number1}>24</Text>
         <Text style = {styles.number2}>of 1043</Text>
