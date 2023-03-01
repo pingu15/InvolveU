@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image} from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 /* image imports */
 import Welcomeicon from '../assets/welcomeIcon.png';
 import RankIcon from '../assets/rankIcon.png';
 import UpArrow from '../assets/upArrow.png';
 import StoreIcon from '../assets/storeIcon.png';
+import Lock from '../assets/lock.png';
 
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
@@ -43,7 +44,7 @@ export default function HomeScreen() {
 
 function Summary({ user }) {
   return(
-    <View style={[styles.box, {height: '35%'}]}>
+    <View style={[styles.box, {height: '28%'}]}>
       <View style = {styles.row}>
         <Image style = {styles.icon} source={Welcomeicon}/>
         <Text style={styles.h1}>Welcome, {user.username}!</Text>
@@ -86,8 +87,9 @@ function Store(){
         <Image style = {styles.icon} source={StoreIcon}/>
         <Text style={styles.h1}>Store</Text>
       </View>
-      <View style = {styles.shopBox}>
-        <Text styles = {styles.h2}>Toque</Text>
+      <View style = {[styles.shopBox, styles.row]}>
+        <Image style = {[styles.icon, {height: 21}, {width: 21}]} source = {Lock}/>
+        <Text style = {styles.h2}>Toque</Text>
       </View>
     </View>
   );
@@ -145,7 +147,14 @@ const styles = StyleSheet.create({
     alignItems: 'left',
   },
   shopBox: {
-    backgroundColor: '#ffe9e9'
+    margin: '5%',
+    width: '90%',
+    borderRadius: 8,
+    backgroundColor: '#ffe9e9',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'left',
+    marginTop: 0,
   },
   row: {
     flexDirection: 'row',
