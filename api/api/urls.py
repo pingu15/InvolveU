@@ -38,4 +38,5 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('events/', include('models.urls')),
     path("signup/", include('accounts.urls')),
+    path('models/', include('models.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
