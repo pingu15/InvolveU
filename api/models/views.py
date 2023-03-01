@@ -40,6 +40,6 @@ def edit_events(request, id):
     return render(request, "index.html", context)
 
 
-def items_view(request, photo_name):
-    img = open('static/photos/'+photo_name, 'rb')
+def items_view(request, photo):
+    img = open('static/photos/'+photo, 'rb')
     return FileResponse(img)
