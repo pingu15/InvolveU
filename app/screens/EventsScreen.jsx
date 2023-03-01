@@ -24,37 +24,6 @@ class YMDDate {
     this.month = parseInt(dateArray[1]);
     this.day = parseInt(dateArray[2]);
   }
-
-  compareDays(date) {
-    if (this.year < date.year) return -1;
-    else if (this.year > date.year) return 1;
-    else {
-      if (this.month < date.month) return -1;
-      else if (this.month > date.month) return 1;
-      else {
-        if (this.day < date.day) return -1;
-        else if (this.day > date.day) return 1;
-        else return 0;
-      }
-    }
-  }
-
-  compareMonths(date) {
-    if (this.year < date.year) return -1;
-    else if (this.year > date.year) return 1;
-    else {
-      if (this.month < date.month) return -1;
-      else if (this.month > date.month) return 1;
-      else return 0;
-    }
-  }
-
-  dayDifference(date) {
-    let millisecondsPerDay = 1000 * 60 * 60 * 24;
-    let thisDate = new Date(this.year, this.month-1, this.day);
-    let dateDate = new Date(date.year, date.month-1, date.day);
-    return Math.round((thisDate.getTime() - dateDate.getTime()) / millisecondsPerDay) + 1;
-  }
 }
 
 function dateToYMD() {
@@ -70,8 +39,16 @@ function YMDToLong(ymd) {
   return `${dayNames[date.getDay()]}, ${monthNames[ymd.month-1]} ${ymd.day}, ${ymd.year}`;
 }
 
-
-
+function Event({ eventData }) {
+  return (
+    <View style={styles.eventcontainer}>
+      <Text>Hi</Text>
+      <Text>{JSON.stringify(eventData.title)}</Text>
+      <Text>{JSON.stringify(eventData.location)}</Text>
+      <Text>{JSON.stringify(eventData.points)}</Text>
+    </View>
+  )
+}
 
 export default function EventsScreen() {
 
@@ -211,7 +188,11 @@ export default function EventsScreen() {
         <View style={styles.eventscontainer}>
           <Text style={styles.text}>{YMDToLong(selectedDay)}</Text>
           <Text style={styles.text}>Events: {JSON.stringify(events)}</Text>
-          
+          {eventsToday.map((event, index) => {
+            return (
+              <Event key={index} eventData={event} />
+            );
+          })}
         </View>
       </ScrollView>
     </View>
@@ -232,6 +213,14 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     backgroundColor: "#fafafa",
   },
+  eventcontainer: {
+    flexGrow: 1,
+    margin: "5%",
+    width: "90%",
+    borderRadius: 8,
+    backgroundColor: "#ffffff",
+    alignSelf: "center",
+  },
   eventscontainer: {
     flexGrow: 1,
     margin: "5%",
@@ -243,6 +232,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 10,
+    margin: "5%",
   },
 });
