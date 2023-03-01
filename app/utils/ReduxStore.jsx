@@ -39,6 +39,7 @@ store.subscribe(() => {
     console.log("from store:" + JSON.stringify(store.getState().username));
     console.log("from store:" + JSON.stringify(store.getState().usersData));
     console.log("from store:" + JSON.stringify(store.getState().userData));
+    console.log("from store:" + JSON.stringify(store.getState().eventsData));
     console.log("-----------------");
 })
 

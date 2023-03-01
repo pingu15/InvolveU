@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import config from "../config.json";
-import { GetUsers } from "../utils/InvolveUApi";
+import { GetEvents, GetUsers } from "../utils/InvolveUApi";
 import {
   StyleSheet,
   View,
@@ -26,6 +26,9 @@ export default function LoginScreen({ navigation }) {
   AsyncStorage.getItem("@username").then((username) => {
     if (username != null) {
       dispatch(setReduxUsername(username));
+      GetEvents().then((events) => {
+        dispatch(setEventsData(events));
+      }).catch((err) => console.log(err));
       GetUsers().then((users) => {
         dispatch(setUsersData(users));
         users.forEach((user) => {
@@ -52,16 +55,20 @@ export default function LoginScreen({ navigation }) {
           updateLoginText(val + " Loading App...");
           loggingIn = false;
           updateLoginText("");
+
+          GetEvents().then((events) => {
+            dispatch(setEventsData(events));
+          }).catch((err) => console.log(err));
+        
           GetUsers().then((users) => {
-            AsyncStorage.setItem("@users", JSON.stringify(users));
             dispatch(setUsersData(users));
             users.forEach((user) => {
               if (user.username == username) {
-                AsyncStorage.setItem("@user", JSON.stringify(users));
                 dispatch(setUserData(user));
               }
             });
-          });
+          }).catch((err) => console.log(err));
+
           navigation.navigate("TabNav");
         } else {
           updateLoginText(val);
