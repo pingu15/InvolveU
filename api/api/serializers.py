@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from accounts.models import User
-from models.models import Event
+from models.models import Event, Item
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -12,4 +12,10 @@ class UserSerializer(serializers.ModelSerializer):
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
+        fields = "__all__"
+
+
+class ItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Item
         fields = "__all__"

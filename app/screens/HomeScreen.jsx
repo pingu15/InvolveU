@@ -6,7 +6,6 @@ import Welcomeicon from '../assets/welcomeIcon.png';
 import RankIcon from '../assets/rankIcon.png';
 import UpArrow from '../assets/upArrow.png';
 import StoreIcon from '../assets/storeIcon.png';
-import Lock from '../assets/lock.png';
 
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
@@ -33,7 +32,7 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <View style = {styles.container}>
-      <ScrollView contentContainerStyle={[styles.container, {paddingBottom: 500}]}>
+      <ScrollView contentContainerStyle={[styles.container, {paddingBottom: '5%'}]}>
           <Summary user = {user}/>
           <Rank user = {user} navigation={navigation}/>
           <Store navigation={navigation}/>
@@ -44,7 +43,7 @@ export default function HomeScreen({ navigation }) {
 
 function Summary({ user }) {
   return(
-    <View style={[styles.box, {height: '28%'}]}>
+    <View style={[styles.box, {height: '29%'}]}>
       <View style = {styles.row}>
         <Image style = {styles.icon} source={Welcomeicon}/>
         <Text style={styles.h1}>Welcome, {user.username}!</Text>
@@ -61,7 +60,7 @@ function Summary({ user }) {
 
 function Rank({ user, navigation }){
   return(
-    <View style = {[styles.box, {height: '50%'}, {marginTop: '0%'}]}>
+    <View style = {[styles.box, {height: '44%'}, {marginTop: '0%'}]}>
       <View style = {styles.row}>
         <Image style = {styles.icon} source={RankIcon}/>
         <Text style={styles.h1}>Rank</Text>
@@ -82,14 +81,10 @@ function Rank({ user, navigation }){
 
 function Store({ navigation }){
   return(
-    <View style = {[styles.box, {height: '52%'}, {marginTop: '0%'}]}>
+    <View style = {[styles.box, {height: '12%'}, {marginTop: '0%'}]}>
       <View style = {styles.row}>
         <Image style = {styles.icon} source={StoreIcon}/>
         <Text style={styles.h1}>Store</Text>
-      </View>
-      <View style = {[styles.shopBox, styles.row]}>
-        <Image style = {[styles.icon, {height: 21}, {width: 21}]} source = {Lock}/>
-        <Text style = {styles.h2}>Toque</Text>
       </View>
       <Button title = "Go to Store" onPress = {() => navigation.navigate('Store')}/>
     </View>
@@ -130,10 +125,6 @@ const styles = StyleSheet.create({
     marginTop: '7%',
     marginLeft: '0%'
   },
-  h2: {
-    fontSize: 20,
-    fontWeight: `medium`,
-  },
   container: {
     flexGrow: 1,
     backgroundColor: '#fafafa',
@@ -163,6 +154,6 @@ const styles = StyleSheet.create({
   icon: {
     height: 36,
     width: 36,
-    margin: 15
+    margin: '5%'
   }
 });
