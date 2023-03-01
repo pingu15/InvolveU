@@ -187,7 +187,7 @@ export default function EventsScreen() {
         </View>
         <View style={styles.eventscontainer}>
           <Text style={styles.text}>{YMDToLong(selectedDay)}</Text>
-          <Text style={styles.text}>Events: {JSON.stringify(events)}</Text>
+          {eventsToday.length == 0 ? <Text style={styles.noEvents}>No Events</Text> : <></>}
           {eventsToday.map((event, index) => {
             return (
               <Event key={index} eventData={event} />
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
     margin: "5%",
     width: "90%",
     borderRadius: 8,
-    backgroundColor: "#ffffff",
+    backgroundColor: "#ffeacc",
     alignSelf: "center",
   },
   eventscontainer: {
@@ -232,6 +232,12 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     fontWeight: 'bold',
-    margin: "5%",
+    marginTop: "5%",
+    marginHorizontal: "5%",
   },
+  noEvents: {
+    fontSize: 16,
+    marginTop: "5%",
+    marginHorizontal: "5%",
+  }
 });

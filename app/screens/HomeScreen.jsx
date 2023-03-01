@@ -6,6 +6,7 @@ import Welcomeicon from '../assets/welcomeIcon.png';
 import RankIcon from '../assets/rankIcon.png';
 import UpArrow from '../assets/upArrow.png';
 import StoreIcon from '../assets/storeIcon.png';
+import { MaterialIcons } from '@expo/vector-icons'; 
 
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
@@ -60,10 +61,11 @@ function Summary({ user }) {
 
 function Rank({ user, navigation }){
   return(
-    <View style = {[styles.box, {height: '44%'}, {marginTop: '0%'}]}>
-      <View style = {styles.row}>
+    <TouchableOpacity style = {[styles.box, {height: '44%'}, {marginTop: '0%'}]} onPress={() => navigation.navigate('Rank')}>
+      <View style = {styles.rank}>
         <Image style = {styles.icon} source={RankIcon}/>
         <Text style={styles.h1}>Rank</Text>
+        <MaterialIcons name="keyboard-arrow-right" size={30} color="black" style={styles.arrow}/>
       </View>
       <Text style = {styles.text}>Among grade {user.grade}s:</Text>
       <View style = {[styles.row, {marginTop: '3%'}]}>
@@ -75,20 +77,19 @@ function Rank({ user, navigation }){
         <Text style = {styles.number1}>24</Text>
         <Text style = {styles.number2}>of 1043</Text>
       </View>
-      <Button title = "Go to Leaderboard" onPress = {() => navigation.navigate('Rank')}/>
-    </View>
+    </TouchableOpacity>
   );
 }
 
 function Store({ navigation }){
   return(
-    <View style = {[styles.box, {height: '12%'}, {marginTop: '0%'}]}>
-      <View style = {styles.row}>
+    <TouchableOpacity style = {[styles.box, {height: '12%'}, {marginTop: '0%'}]} onPress = {() => navigation.navigate('Store')}>
+      <View style = {styles.rank}>
         <Image style = {styles.icon} source={StoreIcon}/>
         <Text style={styles.h1}>Store</Text>
+        <MaterialIcons name="keyboard-arrow-right" size={30} color="black" style={styles.arrow}/>
       </View>
-      <Button title = "Go to Store" onPress = {() => navigation.navigate('Store')}/>
-    </View>
+    </TouchableOpacity>
   );
 }
 
@@ -156,5 +157,13 @@ const styles = StyleSheet.create({
     height: 36,
     width: 36,
     margin: '5%'
+  },
+  arrow: {
+    marginTop: '5%',
+    marginLeft: '50%',
+  },
+  rank: {
+    flexDirection: 'row',
+    width: '100%',
   }
 });

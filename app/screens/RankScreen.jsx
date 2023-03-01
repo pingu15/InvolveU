@@ -1,8 +1,21 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, Image } from 'react-native';
 import RankIcon from '../assets/rankIcon.png';
+import { useSelector } from 'react-redux';
 
 export default function RankScreen() {
+  const user = useSelector(state => state.userData);
+  let grade = [];
+  useSelector(state => state.usersData).forEach(element => {
+    if(element.grade == user.grade)
+      grade.push(element);
+  });
+  console.log(grade);
+  grade.sort(function(a,b) {
+    return a.points > b.points ? -1 : 1;
+  });
+  let idx = grade.indexOf(user);
+  console.log(idx);
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.container}>
@@ -11,10 +24,10 @@ export default function RankScreen() {
                 <Image style = {styles.icon} source={RankIcon}/>
                 <Text style={styles.h1}>Rank</Text>
             </View>
-            <Text style = {styles.h2}>Among grade s:</Text>
+            <Text style = {styles.h2}>Among grade {user.grade}:</Text>
             <View style = {styles.row}>
-                <Text style = {styles.number1}>6</Text>
-                <Text style = {styles.number2}>of 247</Text>
+                <Text style = {styles.number1}>{idx+1}</Text>
+                <Text style = {styles.number2}>of {grade.length}</Text>
             </View>
             <Text style = {styles.h2}>Leaderboard</Text>
             <View style = {styles.row}>
