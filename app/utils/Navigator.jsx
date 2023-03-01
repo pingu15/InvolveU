@@ -9,6 +9,7 @@ import EventsScreen from '../screens/EventsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import StoreScreen from '../screens/StoreScreen';
 import SignupScreen from '../screens/SignupScreen';
+import RankScreen from '../screens/RankScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -39,6 +40,9 @@ export default function Navigator() {
       </Stack.Screen>
       <Stack.Screen options={{headerBackTitleVisible: false}} name="Store">
         {({ navigation }) => <StoreScreen navigation={navigation} />}
+      </Stack.Screen>
+      <Stack.Screen options={{headerBackTitleVisible: false}} name="Rank">
+        {({ navigation }) => <RankScreen navigation={navigation} />}
       </Stack.Screen>
     </Stack.Navigator>
   );

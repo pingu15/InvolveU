@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, Button, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, Button, ScrollView, TouchableOpacity } from 'react-native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 /* image imports */
 import Welcomeicon from '../assets/welcomeIcon.png';
@@ -75,6 +75,7 @@ function Rank({ user, navigation }){
         <Text style = {styles.number1}>24</Text>
         <Text style = {styles.number2}>of 1043</Text>
       </View>
+      <Button title = "Go to Leaderboard" onPress = {() => navigation.navigate('Rank')}/>
     </View>
   );
 }
