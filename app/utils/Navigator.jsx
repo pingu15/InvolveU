@@ -16,7 +16,7 @@ const Tab = createBottomTabNavigator();
 function TabNav({navigation}) {
     return (
         <Tab.Navigator>
-            <Tab.Screen name="Home" component={HomeScreen}>
+            <Tab.Screen name="Home">
               {() => <HomeScreen navigation={navigation} />}
             </Tab.Screen>
             <Tab.Screen name="Events" component={EventsScreen} />
@@ -37,7 +37,9 @@ export default function Navigator() {
         options={{ headerShown: false, gestureEnabled: false }}>
           {({ navigation }) => <TabNav navigation={navigation} />}
       </Stack.Screen>
-      <Stack.Screen name="Store" component={StoreScreen} />
+      <Stack.Screen options={{headerBackTitleVisible: false}} name="Store">
+        {({ navigation }) => <StoreScreen navigation={navigation} />}
+      </Stack.Screen>
     </Stack.Navigator>
   );
 }

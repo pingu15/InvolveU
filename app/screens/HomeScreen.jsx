@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image} from 'react-native';
+import { View, Text, StyleSheet, Image, Button, ScrollView } from 'react-native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 /* image imports */
 import Welcomeicon from '../assets/welcomeIcon.png';
@@ -34,8 +34,8 @@ export default function HomeScreen({ navigation }) {
     <View style = {styles.container}>
       <ScrollView contentContainerStyle={[styles.container, {paddingBottom: 500}]}>
           <Summary user = {user}/>
-          <Rank user = {user}/>
-          <Store/>
+          <Rank user = {user} navigation={navigation}/>
+          <Store navigation={navigation}/>
       </ScrollView>
     </View>
   );
@@ -58,7 +58,7 @@ function Summary({ user }) {
   );
 }
 
-function Rank({user}){
+function Rank({ user, navigation }){
   return(
     <View style = {[styles.box, {height: '50%'}, {marginTop: '0%'}]}>
       <View style = {styles.row}>
@@ -79,7 +79,7 @@ function Rank({user}){
   );
 }
 
-function Store(){
+function Store({ navigation }){
   return(
     <View style = {[styles.box, {height: '52%'}, {marginTop: '0%'}]}>
       <View style = {styles.row}>
@@ -89,6 +89,7 @@ function Store(){
       <View style = {styles.shopBox}>
         <Text styles = {styles.h2}>Toque</Text>
       </View>
+      <Button title = "Go to Store" onPress = {() => navigation.navigate('Store')}/>
     </View>
   );
 }
