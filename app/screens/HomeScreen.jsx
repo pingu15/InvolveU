@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image} from 'react-native';
+import { View, Text, StyleSheet, Image, Button, ScrollView } from 'react-native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 /* image imports */
 import Welcomeicon from '../assets/welcomeIcon.png';
 import RankIcon from '../assets/rankIcon.png';
 import UpArrow from '../assets/upArrow.png';
+import StoreIcon from '../assets/storeIcon.png';
+import Lock from '../assets/lock.png';
 
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
@@ -12,7 +14,7 @@ import { useSelector } from 'react-redux';
 
 //SplashScreen.preventAutoHideAsync();
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   /*const [fontsLoaded] = useFonts({
     'Inter': require('../assets/inter-regular-1.ttf'),
   });
@@ -30,16 +32,19 @@ export default function HomeScreen() {
   const user = useSelector(state => state.userData);
 
   return (
-      <View style={styles.container}>
-          <Summary user={user}/>
-          <Rank user={user}/>
-      </View>
+    <View style = {styles.container}>
+      <ScrollView contentContainerStyle={[styles.container, {paddingBottom: 500}]}>
+          <Summary user = {user}/>
+          <Rank user = {user} navigation={navigation}/>
+          <Store navigation={navigation}/>
+      </ScrollView>
+    </View>
   );
 }
 
 function Summary({ user }) {
   return(
-    <View style={[styles.box, {height: '35%'}]}>
+    <View style={[styles.box, {height: '28%'}]}>
       <View style = {styles.row}>
         <Image style = {styles.icon} source={Welcomeicon}/>
         <Text style={styles.h1}>Welcome, {user.username}!</Text>
@@ -54,9 +59,9 @@ function Summary({ user }) {
   );
 }
 
-function Rank({user}){
+function Rank({ user, navigation }){
   return(
-    <View style = {[styles.box, {height: '40%'}, {marginTop: '0%'}]}>
+    <View style = {[styles.box, {height: '50%'}, {marginTop: '0%'}]}>
       <View style = {styles.row}>
         <Image style = {styles.icon} source={RankIcon}/>
         <Text style={styles.h1}>Rank</Text>
@@ -71,6 +76,22 @@ function Rank({user}){
         <Text style = {styles.number1}>24</Text>
         <Text style = {styles.number2}>of 1043</Text>
       </View>
+    </View>
+  );
+}
+
+function Store({ navigation }){
+  return(
+    <View style = {[styles.box, {height: '52%'}, {marginTop: '0%'}]}>
+      <View style = {styles.row}>
+        <Image style = {styles.icon} source={StoreIcon}/>
+        <Text style={styles.h1}>Store</Text>
+      </View>
+      <View style = {[styles.shopBox, styles.row]}>
+        <Image style = {[styles.icon, {height: 21}, {width: 21}]} source = {Lock}/>
+        <Text style = {styles.h2}>Toque</Text>
+      </View>
+      <Button title = "Go to Store" onPress = {() => navigation.navigate('Store')}/>
     </View>
   );
 }
@@ -109,6 +130,10 @@ const styles = StyleSheet.create({
     marginTop: '7%',
     marginLeft: '0%'
   },
+  h2: {
+    fontSize: 20,
+    fontWeight: `medium`,
+  },
   container: {
     flexGrow: 1,
     backgroundColor: '#fafafa',
@@ -121,6 +146,16 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'left',
+  },
+  shopBox: {
+    margin: '5%',
+    width: '90%',
+    borderRadius: 8,
+    backgroundColor: '#ffe9e9',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'left',
+    marginTop: 0,
   },
   row: {
     flexDirection: 'row',
