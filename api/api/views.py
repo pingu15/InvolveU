@@ -1,8 +1,8 @@
 from rest_framework import viewsets
 
-from .serializers import UserSerializer, EventSerializer
+from .serializers import UserSerializer, EventSerializer, ItemSerializer
 from accounts.models import User
-from models.models import Event
+from models.models import Event, Item
 
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -19,6 +19,11 @@ class UserViewSet(viewsets.ModelViewSet):
 class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
+
+
+class ItemViewSet(viewsets.ModelViewSet):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
