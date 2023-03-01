@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image} from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView} from 'react-native';
 /* image imports */
 import Welcomeicon from '../assets/welcomeIcon.png';
 import RankIcon from '../assets/rankIcon.png';
 import UpArrow from '../assets/upArrow.png';
+import StoreIcon from '../assets/storeIcon.png';
 
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
@@ -26,10 +27,13 @@ export default function HomeScreen() {
   }*/
 
   return (
-      <View style={styles.container}>
+    <View style = {styles.container}>
+      <ScrollView contentContainerStyle={[styles.container, {paddingBottom: 500}]}>
           <Summary/>
           <Rank/>
-      </View>
+          <Store/>
+      </ScrollView>
+    </View>
   );
 }
 
@@ -52,7 +56,7 @@ function Summary() {
 
 function Rank(){
   return(
-    <View style = {[styles.box, {height: '40%'}, {marginTop: '0%'}]}>
+    <View style = {[styles.box, {height: '50%'}, {marginTop: '0%'}]}>
       <View style = {styles.row}>
         <Image style = {styles.icon} source={RankIcon}/>
         <Text style={styles.h1}>Rank</Text>
@@ -66,6 +70,20 @@ function Rank(){
       <View style = {[styles.row, {marginTop: '3%'}]}>
         <Text style = {styles.number1}>24</Text>
         <Text style = {styles.number2}>of 1043</Text>
+      </View>
+    </View>
+  );
+}
+
+function Store(){
+  return(
+    <View style = {[styles.box, {height: '52%'}, {marginTop: '0%'}]}>
+      <View style = {styles.row}>
+        <Image style = {styles.icon} source={StoreIcon}/>
+        <Text style={styles.h1}>Store</Text>
+      </View>
+      <View style = {styles.shopBox}>
+        <Text styles = {styles.h2}>Toque</Text>
       </View>
     </View>
   );
@@ -105,6 +123,10 @@ const styles = StyleSheet.create({
     marginTop: '7%',
     marginLeft: '0%'
   },
+  h2: {
+    fontSize: 20,
+    fontWeight: `medium`,
+  },
   container: {
     flexGrow: 1,
     backgroundColor: '#fafafa',
@@ -117,6 +139,9 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'left',
+  },
+  shopBox: {
+    backgroundColor: '#ffe9e9'
   },
   row: {
     flexDirection: 'row',
