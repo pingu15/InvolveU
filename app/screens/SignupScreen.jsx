@@ -59,7 +59,6 @@ export default function SignupScreen({ navigation }) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-CSRFToken": res.csrftoken,
         },
         body: JSON.stringify({
           username: username,

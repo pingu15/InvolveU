@@ -1,11 +1,13 @@
 import json
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
 from .models import User
 
 
+@csrf_exempt
 def signup(request):
     message = {"message": "", "success": False}
     if request.method == "POST":
