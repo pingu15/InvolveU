@@ -3,16 +3,17 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import config from "../config.json";
 import { GetUsers } from "../utils/InvolveUApi";
 import SelectDropdown from "react-native-select-dropdown";
+import validator from "validator";
 import {
   StyleSheet,
   View,
   Text,
   TextInput,
   TouchableOpacity,
-  Linking,
 } from "react-native";
 
 export default function SignupScreen({ navigation }) {
+  const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
@@ -26,6 +27,11 @@ export default function SignupScreen({ navigation }) {
     if (signingUp) return;
     updateSignupText("Signing Up...");
     signingUp = true;
+    if (!validator.isEmail(email)) {
+      updateSignupText("Invalid email.");
+      signingUp = true;
+      return;
+    }
     signup()
       .then((val) => {
         if (val == "Success!") {
@@ -59,9 +65,9 @@ export default function SignupScreen({ navigation }) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-CSRFToken": res.csrftoken,
         },
         body: JSON.stringify({
+          email: email,
           username: username,
           password: password,
           password2: password2,
@@ -71,7 +77,6 @@ export default function SignupScreen({ navigation }) {
         .then((response) => response.json())
         .then((json) => {
           if (json.success) {
-            console.log("signed up");
             resolve(login());
           } else {
             resolve(json.message);
@@ -158,6 +163,22 @@ export default function SignupScreen({ navigation }) {
             marginBottom: "2%",
           }}
         >
+          Email
+        </Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter your email"
+          fontSize="14"
+          onChangeText={setEmail}
+        />
+        <Text
+          style={{
+            fontSize: 14,
+            fontWeight: "bold",
+            color: "#000",
+            marginBottom: "2%",
+          }}
+        >
           Username
         </Text>
         <TextInput
@@ -215,31 +236,31 @@ export default function SignupScreen({ navigation }) {
         <SelectDropdown
           data={grades}
           onSelect={(selectedItem, index) => setGrade(selectedItem)}
-          defaultButtonText={"Select grade"}
+          defaultValue={9}
           buttonStyle={styles.select}
           buttonTextStyle={styles.selectText}
           dropdownStyle={styles.dropdown}
         ></SelectDropdown>
-      </View>
-      <Text style={styles.loginText}>{signupText}</Text>
-      <View style={styles.bottomcontainer}>
-        <TouchableOpacity style={styles.button} onPress={handleSignup}>
-          <Text style={styles.buttonText}>Sign Up</Text>
-        </TouchableOpacity>
-
-        <View
-          style={{ flexDirection: "row", alignSelf: "center", margin: "10%" }}
-        >
-          <Text style={{ textAlign: "center" }}>Returning user? </Text>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate("Login");
-            }}
-          >
-            <Text style={{ color: "#2280ff", fontWeight: "bold" }}>
-              Login Here
-            </Text>
+        <Text style={styles.loginText}>{signupText}</Text>
+        <View style={styles.bottomcontainer}>
+          <TouchableOpacity style={styles.button} onPress={handleSignup}>
+            <Text style={styles.buttonText}>Sign Up</Text>
           </TouchableOpacity>
+
+          <View
+            style={{ flexDirection: "row", alignSelf: "center", margin: "10%" }}
+          >
+            <Text style={{ textAlign: "center" }}>Returning user? </Text>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("Login");
+              }}
+            >
+              <Text style={{ color: "#2280ff", fontWeight: "bold" }}>
+                Login Here
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </View>
@@ -258,7 +279,7 @@ const styles = StyleSheet.create({
     marginTop: "20%",
   },
   inputcontainer: {
-    height: "40%",
+    height: "50%",
     width: "90%",
     marginHorizontal: "5%",
     marginTop: "5%",
