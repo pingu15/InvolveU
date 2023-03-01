@@ -20,3 +20,12 @@ class Event(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Item(models.Model):
+    name = models.TextField()
+    cost = models.IntegerField()
+    photo = models.ImageField(upload_to='models/static/photos')
+
+    def __str__(self):
+        return self.name

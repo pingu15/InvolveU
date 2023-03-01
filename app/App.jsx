@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import store from './utils/ReduxStore';
 
 export default function App() {
+
   RNStatusBar.setBarStyle('dark-content'); // Sets the status bar text color to white
   return (
     <Provider store={store}>
