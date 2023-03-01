@@ -133,7 +133,6 @@ export default function LoginScreen({ navigation }) {
         <TextInput
           style={styles.input}
           placeholder="Type your username"
-          fontSize="14"
           onChangeText={setUsername}
         />
         <Text style={{fontSize: 14, fontWeight: "bold", color: "#000", marginBottom: "2%"}}>Password</Text>
@@ -141,7 +140,6 @@ export default function LoginScreen({ navigation }) {
           style={styles.input}
           placeholder="Type your password"
           secureTextEntry
-          fontSize="14"
           value={password}
           onChangeText={setPassword}
         />

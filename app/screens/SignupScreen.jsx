@@ -168,7 +168,6 @@ export default function SignupScreen({ navigation }) {
         <TextInput
           style={styles.input}
           placeholder="Enter your email"
-          fontSize="14"
           onChangeText={setEmail}
         />
         <Text
@@ -184,7 +183,6 @@ export default function SignupScreen({ navigation }) {
         <TextInput
           style={styles.input}
           placeholder="Type your username"
-          fontSize="14"
           onChangeText={setUsername}
         />
         <Text
@@ -201,7 +199,6 @@ export default function SignupScreen({ navigation }) {
           style={styles.input}
           placeholder="Type your password"
           secureTextEntry
-          fontSize="14"
           value={password}
           onChangeText={setPassword}
         />
@@ -219,7 +216,6 @@ export default function SignupScreen({ navigation }) {
           style={styles.input}
           placeholder="Re-type your password"
           secureTextEntry
-          fontSize="14"
           value={password2}
           onChangeText={setPassword2}
         />

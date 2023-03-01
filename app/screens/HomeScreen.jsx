@@ -100,9 +100,9 @@ const styles = StyleSheet.create({
   h1: {
     fontSize: 25,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: "10%",
     color: '#1D1E25',
-    borderTopWidth: 20,
+    marginTop: "5%"
   },
   text: {
     fontSize: 14,
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    alignItems: 'left',
+    alignItems: 'flex-start',
   },
   shopBox: {
     margin: '5%',
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffe9e9',
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    alignItems: 'left',
+    alignItems: 'flex-start',
     marginTop: 0,
   },
   row: {
