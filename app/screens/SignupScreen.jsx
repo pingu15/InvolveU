@@ -4,6 +4,13 @@ import config from "../config.json";
 import { GetUsers } from "../utils/InvolveUApi";
 import SelectDropdown from "react-native-select-dropdown";
 import validator from "validator";
+import { useDispatch } from "react-redux";
+import {
+  setUsername as setReduxUsername,
+  setUsersData,
+  setUserData,
+  setEventsData,
+} from "../utils/ReduxStore";
 import {
   StyleSheet,
   View,
@@ -13,6 +20,7 @@ import {
 } from "react-native";
 
 export default function SignupScreen({ navigation }) {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -36,21 +44,20 @@ export default function SignupScreen({ navigation }) {
       .then((val) => {
         if (val == "Success!") {
           AsyncStorage.setItem("@username", username);
+          dispatch(setReduxUsername(username));
           updateSignupText(val + " Loading App...");
           signingUp = false;
           updateSignupText("");
           GetUsers().then((users) => {
             AsyncStorage.setItem("@users", JSON.stringify(users));
-            console.log("list of users:" + JSON.stringify(users));
+            dispatch(setUsersData(users));
             users.forEach((user) => {
               if (user.username == username) {
-                console.log("user found in list: " + JSON.stringify(user));
-                AsyncStorage.setItem("@user", JSON.stringify(user)).then(() => {
-                  navigation.navigate("TabNav");
-                });
+                dispatch(setUserData(user));
               }
             });
           });
+          navigation.navigate("TabNav");
         } else {
           updateSignupText(val);
           signingUp = false;
