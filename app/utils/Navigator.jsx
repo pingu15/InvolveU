@@ -7,6 +7,7 @@ import LoginScreen from '../screens/LoginScreen';
 import HomeScreen from '../screens/HomeScreen';
 import EventsScreen from '../screens/EventsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import StoreScreen from '../screens/StoreScreen';
 import SignupScreen from '../screens/SignupScreen';
 
 const Stack = createStackNavigator();
@@ -15,7 +16,9 @@ const Tab = createBottomTabNavigator();
 function TabNav({navigation}) {
     return (
         <Tab.Navigator>
-            <Tab.Screen name="Home" component={HomeScreen} />
+            <Tab.Screen name="Home">
+              {() => <HomeScreen navigation={navigation} />}
+            </Tab.Screen>
             <Tab.Screen name="Events" component={EventsScreen} />
             <Tab.Screen name="Settings">
               {() => <SettingsScreen navigation={navigation} />}
@@ -33,7 +36,10 @@ export default function Navigator() {
         name="TabNav"
         options={{ headerShown: false, gestureEnabled: false }}>
           {({ navigation }) => <TabNav navigation={navigation} />}
-        </Stack.Screen>
+      </Stack.Screen>
+      <Stack.Screen options={{headerBackTitleVisible: false}} name="Store">
+        {({ navigation }) => <StoreScreen navigation={navigation} />}
+      </Stack.Screen>
     </Stack.Navigator>
   );
 }

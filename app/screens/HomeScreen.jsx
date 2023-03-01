@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, Button, ScrollView } from 'react-native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 /* image imports */
 import Welcomeicon from '../assets/welcomeIcon.png';
@@ -14,7 +14,7 @@ import { useSelector } from 'react-redux';
 
 //SplashScreen.preventAutoHideAsync();
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   /*const [fontsLoaded] = useFonts({
     'Inter': require('../assets/inter-regular-1.ttf'),
   });
@@ -35,8 +35,8 @@ export default function HomeScreen() {
     <View style = {styles.container}>
       <ScrollView contentContainerStyle={[styles.container, {paddingBottom: 500}]}>
           <Summary user = {user}/>
-          <Rank user = {user}/>
-          <Store/>
+          <Rank user = {user} navigation={navigation}/>
+          <Store navigation={navigation}/>
       </ScrollView>
     </View>
   );
@@ -59,7 +59,7 @@ function Summary({ user }) {
   );
 }
 
-function Rank({user}){
+function Rank({ user, navigation }){
   return(
     <View style = {[styles.box, {height: '50%'}, {marginTop: '0%'}]}>
       <View style = {styles.row}>
@@ -80,7 +80,7 @@ function Rank({user}){
   );
 }
 
-function Store(){
+function Store({ navigation }){
   return(
     <View style = {[styles.box, {height: '52%'}, {marginTop: '0%'}]}>
       <View style = {styles.row}>
@@ -91,6 +91,7 @@ function Store(){
         <Image style = {[styles.icon, {height: 21}, {width: 21}]} source = {Lock}/>
         <Text style = {styles.h2}>Toque</Text>
       </View>
+      <Button title = "Go to Store" onPress = {() => navigation.navigate('Store')}/>
     </View>
   );
 }
