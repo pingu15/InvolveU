@@ -8,14 +8,18 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  Linking
+  Linking,
 } from "react-native";
 
 import { useDispatch } from "react-redux";
-import { setUsername as setReduxUsername, setUsersData, setUserData, setEventsData } from "../utils/ReduxStore";
+import {
+  setUsername as setReduxUsername,
+  setUsersData,
+  setUserData,
+  setEventsData,
+} from "../utils/ReduxStore";
 
 export default function LoginScreen({ navigation }) {
-
   const dispatch = useDispatch();
 
   const [username, setUsername] = useState("");
@@ -26,18 +30,25 @@ export default function LoginScreen({ navigation }) {
   AsyncStorage.getItem("@username").then((username) => {
     if (username != null) {
       dispatch(setReduxUsername(username));
-      GetEvents().then((events) => {
-        dispatch(setEventsData(events));
-      }).catch((err) => console.log(err));
-      GetUsers().then((users) => {
-        dispatch(setUsersData(users));
-        users.forEach((user) => {
-          if (user.username == username) {
-            dispatch(setUserData(user));
-          }
+      GetEvents()
+        .then((events) => {
+          dispatch(setEventsData(events));
+        })
+        .catch((err) => console.log(err))
+        .then(() => {
+          GetUsers()
+            .then((users) => {
+              dispatch(setUsersData(users));
+              users.forEach((user) => {
+                if (user.username == username) {
+                  dispatch(setUserData(user));
+                }
+              });
+            })
+            .then(() => {
+              navigation.navigate("TabNav");
+            });
         });
-      });
-      navigation.navigate("TabNav");
       return;
     }
   });
@@ -56,20 +67,25 @@ export default function LoginScreen({ navigation }) {
           loggingIn = false;
           updateLoginText("");
 
-          GetEvents().then((events) => {
-            dispatch(setEventsData(events));
-          }).catch((err) => console.log(err));
-        
-          GetUsers().then((users) => {
-            dispatch(setUsersData(users));
-            users.forEach((user) => {
-              if (user.username == username) {
-                dispatch(setUserData(user));
-              }
+          GetEvents()
+            .then((events) => {
+              dispatch(setEventsData(events));
+            })
+            .catch((err) => console.log(err))
+            .then(() => {
+              GetUsers()
+                .then((users) => {
+                  dispatch(setUsersData(users));
+                  users.forEach((user) => {
+                    if (user.username == username) {
+                      dispatch(setUserData(user));
+                    }
+                  });
+                })
+                .then(() => {
+                  navigation.navigate("TabNav");
+                });
             });
-          }).catch((err) => console.log(err));
-
-          navigation.navigate("TabNav");
         } else {
           updateLoginText(val);
           loggingIn = false;
@@ -124,25 +140,51 @@ export default function LoginScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.titlecontainer}>
-        <Text style={{
-          fontSize: 30,
-          fontWeight: "bold",
-          marginBottom: 10,
-        }}>Welcome Back!</Text>
-              <Text style={{
-          fontSize: 14,
-          color: "#a6a6a6",
-        }}>Log back in</Text> 
+        <Text
+          style={{
+            fontSize: 30,
+            fontWeight: "bold",
+            marginBottom: 10,
+          }}
+        >
+          Welcome Back!
+        </Text>
+        <Text
+          style={{
+            fontSize: 14,
+            color: "#a6a6a6",
+          }}
+        >
+          Log back in
+        </Text>
       </View>
 
       <View style={styles.inputcontainer}>
-        <Text style={{fontSize: 14, fontWeight: "bold", color: "#000", marginBottom: "2%"}}>Username</Text>
+        <Text
+          style={{
+            fontSize: 14,
+            fontWeight: "bold",
+            color: "#000",
+            marginBottom: "2%",
+          }}
+        >
+          Username
+        </Text>
         <TextInput
           style={styles.input}
           placeholder="Type your username"
           onChangeText={setUsername}
         />
-        <Text style={{fontSize: 14, fontWeight: "bold", color: "#000", marginBottom: "2%"}}>Password</Text>
+        <Text
+          style={{
+            fontSize: 14,
+            fontWeight: "bold",
+            color: "#000",
+            marginBottom: "2%",
+          }}
+        >
+          Password
+        </Text>
         <TextInput
           style={styles.input}
           placeholder="Type your password"
@@ -156,11 +198,19 @@ export default function LoginScreen({ navigation }) {
         <TouchableOpacity style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
-        
-        <View style={{flexDirection: "row", alignSelf: "center", margin: "10%"}}>
-          <Text style={{ textAlign: 'center' }}>New user?{' '}</Text>
-          <TouchableOpacity onPress={() => {navigation.navigate("Signup")}}>
-            <Text style={{ color: '#2280ff', fontWeight: "bold" }}>Sign up here</Text>
+
+        <View
+          style={{ flexDirection: "row", alignSelf: "center", margin: "10%" }}
+        >
+          <Text style={{ textAlign: "center" }}>New user? </Text>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("Signup");
+            }}
+          >
+            <Text style={{ color: "#2280ff", fontWeight: "bold" }}>
+              Sign up here
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -178,7 +228,6 @@ const styles = StyleSheet.create({
     width: "90%",
     marginHorizontal: "5%",
     marginTop: "20%",
-
   },
   inputcontainer: {
     height: "40%",

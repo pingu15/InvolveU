@@ -10,7 +10,7 @@ import {
 } from "react-native";
 
 import { logout } from "../utils/ReduxStore";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 
 function Profile({ user }) {
   return (
@@ -86,12 +86,9 @@ function TermsButton() {
 }
 
 export default function SettingsScreen({ navigation }) {
-
-  const user = useSelector(state => state.userData);
-  const dispatch = useDispatch();
+  const user = useSelector((state) => state.userData);
 
   const handleLogout = () => {
-    dispatch(logout());
     AsyncStorage.clear().then(() => {
       navigation.navigate("Login");
     });
@@ -101,7 +98,7 @@ export default function SettingsScreen({ navigation }) {
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.overview}>
-          <Profile user={user}/>
+          <Profile user={user} />
           <Separator />
 
           <View style={styles.togglecontentcontainer}>
@@ -134,9 +131,9 @@ export default function SettingsScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   bottombuttonscontainer: {
-    width: '85%',
-    marginBottom: '8%',
-    overflow: 'hidden',
+    width: "85%",
+    marginBottom: "8%",
+    overflow: "hidden",
   },
   bottombutton: {
     marginTop: "8%",
