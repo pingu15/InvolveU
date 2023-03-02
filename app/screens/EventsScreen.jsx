@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { Calendar, CalendarList } from 'react-native-calendars';
 import { useSelector } from 'react-redux';
+import EventIcon from '../assets/eventIcon.png';
 
 const staticCalendarProps = {
   showSixWeeks: true,
@@ -42,8 +43,7 @@ function YMDToLong(ymd) {
 function Event({ eventData }) {
   return (
     <View style={styles.eventcontainer}>
-      <Text>Hi</Text>
-      <Text>{JSON.stringify(eventData.title)}</Text>
+      <Text style = {styles.h2}>{JSON.stringify(eventData.title)}</Text>
       <Text>{JSON.stringify(eventData.location)}</Text>
       <Text>{JSON.stringify(eventData.points)}</Text>
     </View>
@@ -186,6 +186,10 @@ export default function EventsScreen() {
           </View> 
         </View>
         <View style={styles.eventscontainer}>
+          <View style={styles.row}>
+            <Image style = {styles.icon} source = {EventIcon}/>
+            <Text style = {styles.h1}>Events</Text>
+          </View>
           <Text style={styles.text}>{YMDToLong(selectedDay)}</Text>
           {eventsToday.length == 0 ? <Text style={styles.noEvents}>No Events</Text> : <></>}
           {eventsToday.map((event, index) => {
@@ -230,14 +234,37 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   text: {
-    fontSize: 20,
+    fontSize: 15,
     fontWeight: 'bold',
-    marginTop: "5%",
+    color: '#808d9e',
     marginHorizontal: "5%",
   },
   noEvents: {
     fontSize: 16,
     marginTop: "5%",
     marginHorizontal: "5%",
-  }
+  },
+  h1: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    marginBottom: "5%",
+    color: '#1D1E25',
+    marginTop: "5%"
+  },
+  h2: {
+    fontSize: 20,
+    fontWeight: 'medium',
+    margin: '5%',
+  },
+  body:{
+    fontSize: 15
+  },
+  row: {
+    flexDirection: 'row',
+  },
+  icon: {
+    height: 36,
+    width: 36,
+    margin: '5%'
+  },
 });
