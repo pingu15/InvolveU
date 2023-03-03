@@ -7,6 +7,7 @@ const mainSlice = createSlice({
     usersData: [],
     userData: {},
     eventsData: [],
+    itemsData: [],
   },
   reducers: {
     setUsername: (state, action) => {
@@ -24,11 +25,14 @@ const mainSlice = createSlice({
     logout: (state) => {
         state.username = ''
         state.userData = {}
-    }
+    },
+    setItemsData: (state, action) => {
+      state.itemsData = action.payload
+    },
   }
 })
 
-export const { setUsername, setUsersData, setUserData, setEventsData, logout } = mainSlice.actions
+export const { setUsername, setUsersData, setUserData, setEventsData, logout, setItemsData } = mainSlice.actions
 
 const store = configureStore({
   reducer: mainSlice.reducer
@@ -36,10 +40,11 @@ const store = configureStore({
 
 // Can still subscribe to the store
 store.subscribe(() => {
-    console.log("from store:" + JSON.stringify(store.getState().username));
-    console.log("from store:" + JSON.stringify(store.getState().usersData));
-    console.log("from store:" + JSON.stringify(store.getState().userData));
-    console.log("from store:" + JSON.stringify(store.getState().eventsData));
+    console.log("from store [username]:" + JSON.stringify(store.getState().username));
+    console.log("from store [usersData]:" + JSON.stringify(store.getState().usersData));
+    console.log("from store [userData]:" + JSON.stringify(store.getState().userData));
+    console.log("from store [eventsData]:" + JSON.stringify(store.getState().eventsData));
+    console.log("from store [itemsData]:" + JSON.stringify(store.getState().itemsData));
     console.log("-----------------");
 })
 

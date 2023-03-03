@@ -14,7 +14,7 @@ export default function RankScreen() {
     return a.points > b.points ? -1 : 1;
   });
   let idx = grade.indexOf(user);
-  console.log(idx);
+  console.log(grade);
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.container}>
@@ -30,18 +30,19 @@ export default function RankScreen() {
           </View>
           <Text style={styles.h2}>Leaderboard</Text>
           <View style={{ width: "100%" }}>
-            {grade.map((user) => {
+            {grade.map((user, idx) => {
               return (
                 <View
-                  key={user}
+                  key={idx}
                   style={{
                     width: "90%",
                     flexDirection: "row",
-                    marginLeft: "2%",
+                    marginLeft: "5%",
                     marginBottom: "3%",
                     borderColor: "#808d9e",
                     borderWidth: 1,
-                    alignItems: "align-end",
+                    alignItems: "flex-start",
+                    justifyContent: "flex-start",
                   }}
                 >
                   <Text style={styles.username}>
@@ -110,13 +111,9 @@ const styles = StyleSheet.create({
   username: {
     fontSize: 14,
     color: "#1d1e25",
-    marginLeft: "5%",
   },
   points: {
     fontSize: 14,
     color: "#808d9e",
-    textAlign: "right",
-    width: "75%",
-    justifyContent: "flex-end",
   },
 });

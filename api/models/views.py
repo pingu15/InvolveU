@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import Http404, FileResponse
 from django.core.exceptions import PermissionDenied
+from django.http import HttpResponse
 
 from .models import Event
 from accounts.models import User
@@ -40,6 +41,7 @@ def edit_events(request, id):
     return render(request, "index.html", context)
 
 
-def items_view(request, photo):
-    img = open('static/photos/'+photo, 'rb')
+def items_view(request, id, type):
+    print("PEFIAOWFJOAWGBOW")
+    img = open('static/photos/'+id+"."+type, 'rb')
     return FileResponse(img)

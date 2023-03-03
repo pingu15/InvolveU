@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import config from "../config.json";
-import { GetEvents, GetUsers } from "../utils/InvolveUApi";
+import { GetEvents, GetUsers, GetItems } from "../utils/InvolveUApi";
 import {
   StyleSheet,
   View,
@@ -17,6 +17,7 @@ import {
   setUsersData,
   setUserData,
   setEventsData,
+  setItemsData,
 } from "../utils/ReduxStore";
 
 export default function LoginScreen({ navigation }) {
@@ -27,28 +28,39 @@ export default function LoginScreen({ navigation }) {
   const [loginText, updateLoginText] = useState("");
   let loggingIn = false;
 
+  function addRedux() {
+    GetItems()
+      .then((items) => {
+        dispatch(setItemsData(items));
+      })
+      .catch((err) => console.log(err))
+      .then(() => {
+        GetEvents()
+          .then((events) => {
+            dispatch(setEventsData(events));
+          })
+          .catch((err) => console.log(err))
+          .then(() => {
+            GetUsers()
+              .then((users) => {
+                dispatch(setUsersData(users));
+                users.forEach((user) => {
+                  if (user.username == username) {
+                    dispatch(setUserData(user));
+                  }
+                });
+              })
+              .then(() => {
+                navigation.navigate("TabNav");
+              });
+          });
+      });
+  }
+
   AsyncStorage.getItem("@username").then((username) => {
     if (username != null) {
       dispatch(setReduxUsername(username));
-      GetEvents()
-        .then((events) => {
-          dispatch(setEventsData(events));
-        })
-        .catch((err) => console.log(err))
-        .then(() => {
-          GetUsers()
-            .then((users) => {
-              dispatch(setUsersData(users));
-              users.forEach((user) => {
-                if (user.username == username) {
-                  dispatch(setUserData(user));
-                }
-              });
-            })
-            .then(() => {
-              navigation.navigate("TabNav");
-            });
-        });
+      addRedux();
       return;
     }
   });
@@ -62,30 +74,10 @@ export default function LoginScreen({ navigation }) {
         if (val == "Success!") {
           AsyncStorage.setItem("@username", username);
           dispatch(setReduxUsername(username));
-
           updateLoginText(val + " Loading App...");
+          addRedux();
           loggingIn = false;
           updateLoginText("");
-
-          GetEvents()
-            .then((events) => {
-              dispatch(setEventsData(events));
-            })
-            .catch((err) => console.log(err))
-            .then(() => {
-              GetUsers()
-                .then((users) => {
-                  dispatch(setUsersData(users));
-                  users.forEach((user) => {
-                    if (user.username == username) {
-                      dispatch(setUserData(user));
-                    }
-                  });
-                })
-                .then(() => {
-                  navigation.navigate("TabNav");
-                });
-            });
         } else {
           updateLoginText(val);
           loggingIn = false;

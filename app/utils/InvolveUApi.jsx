@@ -21,3 +21,14 @@ export async function GetEvents() {
     console.log(error);
   }
 }
+
+export async function GetItems() {
+  try {
+    const response = await fetch(`${config.server}/api/items/`, { method: "GET" });
+    const json = await response.json();
+    console.log("PEEPEEPOOPOO");
+    return json;
+  } catch(error) {
+    console.log(error);
+  }
+}
