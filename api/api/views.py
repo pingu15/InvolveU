@@ -114,6 +114,8 @@ def winners_view(request):
             lw = LastWinner(date=datetime.now())
             lw.save()
         for user in all:
+            if datetime.now().month == 6:
+                user.grade = user.grade + 1
             user.points = 0
             user.save()
     return render(request, "winners.html", context)
