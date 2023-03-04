@@ -7,7 +7,6 @@ export function GetUsers() {
     })
       .then((response) => response.json())
       .then((json) => {
-        console.log(json);
         resolve(json);
       })
       .catch((err) => {
@@ -23,7 +22,6 @@ export function GetEvents() {
     })
       .then((response) => response.json())
       .then((json) => {
-        console.log(json);
         resolve(json);
       })
       .catch((err) => {
@@ -39,7 +37,6 @@ export function GetItems() {
     })
       .then((response) => response.json())
       .then((json) => {
-        console.log(json);
         resolve(json);
       })
       .catch((err) => {
