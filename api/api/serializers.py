@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from accounts.models import User
-from models.models import Event, Item
+from models.models import Event, Item, LastWinner
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -18,4 +18,10 @@ class EventSerializer(serializers.ModelSerializer):
 class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item
+        fields = "__all__"
+
+
+class LastWinnerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LastWinner
         fields = "__all__"

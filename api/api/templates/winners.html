@@ -1,0 +1,38 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>InvolveU</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <link rel="icon" href="{% static 'icon.ico' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+  </head>
+  <body class="is-preload">
+    <!-- Header -->
+    <header id="header">
+      <h1>Select Quarterly Winners!</h1>
+      <p>
+        Last selection: {{date}} days ago<br />Note: all points will reset for a
+        new quarter once you pick winners!
+      </p>
+    </header>
+
+    <!-- Signup Form -->
+    <form id="signup-form" method="POST" action="{% url 'winners_view' %}">
+      <input type="submit" value="Select Now" />
+      {% csrf_token %}
+    </form>
+    <p style="color: #ffffff">{{message}}</p>
+    <!-- Footer -->
+    <footer id="footer">
+      <ul class="icons">
+        Logged in as {{user}}
+      </ul>
+    </footer>
+  </body>
+</html>

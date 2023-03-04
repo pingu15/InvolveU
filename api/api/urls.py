@@ -22,7 +22,7 @@ from django.urls import include, path
 
 from rest_framework import routers
 
-from .views import UserViewSet, EventViewSet, MyTokenObtainPairView, ItemViewSet
+from .views import UserViewSet, EventViewSet, MyTokenObtainPairView, ItemViewSet, LastWinnerViewSet, winners_view
 
 from rest_framework_simplejwt.views import TokenRefreshView
 
@@ -30,6 +30,7 @@ router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'events', EventViewSet)
 router.register(r'items', ItemViewSet)
+router.register(r'winners', LastWinnerViewSet)
 
 urlpatterns = [
     path('api/token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
@@ -39,4 +40,5 @@ urlpatterns = [
     path('events/', include('models.urls')),
     path("signup/", include('accounts.urls')),
     path('models/', include('models.urls')),
+    path('winners/', winners_view, name='winners_view'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

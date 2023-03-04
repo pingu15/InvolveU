@@ -29,3 +29,10 @@ class Item(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class LastWinner(models.Model):
+    date = models.DateTimeField()
+
+    def __str__(self):
+        return self.date
