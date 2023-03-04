@@ -8,9 +8,11 @@ The initial app design can be found at https://www.figma.com/file/204M6ZpTg2ZjOx
 
 The documentation for the app can be found at https://pingu15.github.io/InvolveU/.
 
-## Api
+## Api/Docs
 
 The api can be found at https://involveu.up.railway.app/api. Admins (teachers) can access the admin panel at https://involveu.up.railway.app/admin.
+
+Code documentation for the mobile app can be found at https://pingu15.github.io/InvolveU.
 
 ## App
 
