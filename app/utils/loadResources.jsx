@@ -3,6 +3,11 @@ import { GetItems, GetEvents, GetUsers } from "./InvolveUApi";
 import { useDispatch } from "react-redux";
 import { setItemsData, setUsersData, setEventsData } from "./ReduxStore";
 
+/**
+ * Fetches model and users data from the database and stores it in the Redux store.
+ * 
+ * @returns {boolean} True if the data has been loaded, false otherwise
+ */
 export default function loadResources() {
   console.log("loadingResources");
   const [doneLoading, setLoading] = React.useState(false);

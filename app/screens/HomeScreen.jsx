@@ -20,22 +20,15 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useSelector } from "react-redux";
 
-//SplashScreen.preventAutoHideAsync();
-
+/**
+ * The home screen contains a summary of the users's points and ranking.
+ * The user may navigate to the leaderboard or the prize store from this screen.
+ * 
+ * @param {Object} navigation the navigation prop passed to the screen
+ * 
+ * @returns {JSX.Element} The home screen
+ */
 export default function HomeScreen({ navigation }) {
-  /*const [fontsLoaded] = useFonts({
-    'Inter': require('../assets/inter-regular-1.ttf'),
-  });
-
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
-
-  if (!fontsLoaded) {
-    return null;
-  }*/
 
   const user = useSelector((state) => state.userData);
   let grade = [];
@@ -72,6 +65,13 @@ export default function HomeScreen({ navigation }) {
   );
 }
 
+/**
+ * Component displays welcome and user's points.
+ * 
+ * @param {Object} user the user's data 
+ * 
+ * @returns {JSX.Element} the summary component
+ */
 function Summary({ user }) {
   return (
     <View style={[styles.box, { height: "29%" }]}>
@@ -93,6 +93,19 @@ function Summary({ user }) {
   );
 }
 
+/**
+ * Component displays the user's rank among their grade and all users.
+ * Can be clicked to navigate to the leaderboard.
+ * 
+ * @param {Object} user the user's data
+ * @param {Object} navigation the navigation prop passed to the screen
+ * @param {Number} idx the user's rank among their grade
+ * @param {Number} gradesLength the number of users in the user's grade
+ * @param {Number} allGradesLength the number of users in the school
+ * @param {Number} allGradesIdx the user's rank among all users
+ *  
+ * @returns {JSX.Element} the rank component
+ */
 function Rank({
   user,
   navigation,
@@ -130,6 +143,13 @@ function Rank({
   );
 }
 
+/**
+ * Component displays the prize store icon. Can be clicked to navigate to the prize store.
+ * 
+ * @param {Object} navigation the navigation prop passed to the screen
+ * 
+ * @returns {JSX.Element} the prize component
+ */
 function Prize({ navigation }) {
   return (
     <TouchableOpacity

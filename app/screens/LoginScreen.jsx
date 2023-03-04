@@ -16,6 +16,18 @@ import {
 } from "../utils/ReduxStore";
 import { GetRefreshToken } from "../utils/InvolveUApi";
 
+/**
+ * The login screen allows the user to login to their account.
+ * 
+ * If the user is already logged in this screen will automatically redirect to the home screen.
+ * 
+ * When the user is logged in, the username and refresh token are stored in the async storage,
+ * and the user's data is stored in the redux store.
+ * 
+ * @param {Object} navigation the navigation prop passed to the screen
+ * 
+ * @returns {JSX.Element} The login screen
+ */
 export default function LoginScreen({ navigation }) {
   const dispatch = useDispatch();
 
@@ -51,6 +63,9 @@ export default function LoginScreen({ navigation }) {
     });
   }, []);
 
+  /**
+   * Handles the login button press.
+   */
   const handleLogin = () => {
     if (loggingIn) return;
     updateLoginText("Logging in...");
@@ -78,6 +93,12 @@ export default function LoginScreen({ navigation }) {
       .catch((err) => console.log(err));
   };
 
+  /**
+   * Attempts to log in user by posting the username and password to the server.
+   * Server will return a refresh token and an access token if successful and a message indicating the status.
+   * 
+   * @returns {Promise} A promise that resolves to a string indicating the result of the login attempt.
+   */
   function login() {
     return new Promise((resolve, reject) => {
       fetch(`${config.server}/api/token/`, {
@@ -93,8 +114,6 @@ export default function LoginScreen({ navigation }) {
         .then((response) => response.json())
         .then((json) => {
           if (json.access && json.refresh) {
-            console.log(typeof json.access);
-            console.log(typeof json.refresh);
             AsyncStorage.setItem("@accesstoken", json.access)
               .then(() => {
                 AsyncStorage.setItem("@refreshtoken", json.refresh)

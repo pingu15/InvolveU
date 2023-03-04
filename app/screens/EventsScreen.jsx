@@ -7,20 +7,30 @@ import LocIcon from '../assets/locIcon.png';
 import TimeIcon from '../assets/timeIcon.png';
 import StarIcon from '../assets/starIcon.png';
 
+// settings that are passed to the calendar
 const staticCalendarProps = {
   showSixWeeks: true,
   disableMonthChange: true,
 };
 
+// month and day names to show full date in calendar
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
+/**
+ * A class to represent a date in the format YYYY-MM-DD.
+ */
 class YMDDate {
   year;
   month;
   day;
   strform;
 
+  /**
+   * Creates a YMDDdate object to store a date with easy access to the year, month, and day.
+   * 
+   * @param {String} dateString takes a string in the format YYYY-MM-DD
+   */
   constructor(dateString) {
     this.strform = dateString;
     let dateArray = dateString.split('-');
@@ -30,6 +40,11 @@ class YMDDate {
   }
 }
 
+/**
+ * Converts today's date to a YMDDate object.
+ * 
+ * @returns {YMDDate} converts today's date to a YMDDdate object
+ */
 function dateToYMD() {
   let date = new Date();
   let year = date.getFullYear();
@@ -38,11 +53,23 @@ function dateToYMD() {
   return new YMDDate(`${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`);
 }
 
+/**
+ * Converts a YMDDate object to a string in the format "Day, Month Day, Year".
+ * 
+ * @param {YMDDate} ymd YMDDate object
+ * @returns {String} string in the format "Day, Month Day, Year"
+ */
 function YMDToLong(ymd) {
   let date = new Date(ymd.year, ymd.month-1, ymd.day);
   return `${dayNames[date.getDay()]}, ${monthNames[ymd.month-1]} ${ymd.day}, ${ymd.year}`;
 }
 
+/**
+ * Component used to display event information.
+ * 
+ * @param {Object} eventData
+ * @returns {JSX.Element} a component that displays the event information
+ */
 function Event({ eventData }) {
   let time = JSON.stringify(eventData.date).split('T')[1].replace('Z', '').replace('"', '').substring(0, 5)
   if(parseInt(time.substring(0, 2)) > 11){
@@ -76,6 +103,11 @@ function Event({ eventData }) {
   )
 }
 
+/**
+ * The events screen contains an interactive calendar that will also display events on the selected day.
+ * 
+ * @returns {JSX.Element} The events screen
+ */
 export default function EventsScreen() {
 
   const events = useSelector(state => state.eventsData);

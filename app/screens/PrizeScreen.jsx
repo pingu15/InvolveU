@@ -5,6 +5,12 @@ import StoreIcon from "../assets/storeIcon.png";
 import Star from "../assets/star.png";
 import { useSelector } from "react-redux";
 
+/**
+ * The prize screen allows the user to view the prizes they can redeem with their points.
+ * Prizes are sorted by cost.
+ * 
+ * @returns {JSX.Element} The prize screen
+ */
 export default function PrizeScreen() {
   let prizeItems = [];
   let tmp = useSelector((state) => state.itemsData);
@@ -51,6 +57,16 @@ export default function PrizeScreen() {
   );
 }
 
+/**
+ * Component to display a prize item.
+ * 
+ * @param {String} itemName The name of the prize item
+ * @param {Number} points The cost of the prize item
+ * @param {String} image The image of the prize item
+ * @param {Number} userPoints The user's current points
+ * 
+ * @returns {JSX.Element} A component containing the prize item
+ */
 function PrizeItem({ itemName, points, image, userPoints }) {
   return (
     <View style={styles.shopBox}>

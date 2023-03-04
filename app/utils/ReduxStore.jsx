@@ -1,5 +1,21 @@
 import { createSlice, configureStore } from '@reduxjs/toolkit'
 
+/*
+Redux store for the app.
+
+The main slice stores all the data required for the app:
+username
+usersData
+userData (initial state is given a placeholder if the user is not logged in)
+eventsData
+itemsData
+
+Reducers are used to modify the data in the state. They are dispatched in various
+components through actions.
+ 
+Data is stored in JSON format.
+
+*/
 const mainSlice = createSlice({
   name: 'main',
   initialState: {
@@ -32,20 +48,13 @@ const mainSlice = createSlice({
   }
 })
 
+// dispatchable actions
 export const { setUsername, setUsersData, setUserData, setEventsData, logout, setItemsData } = mainSlice.actions
 
+// creates the Redux store
 const store = configureStore({
   reducer: mainSlice.reducer
 })
 
-// Can still subscribe to the store
-store.subscribe(() => {
-    console.log("from store [username]:" + JSON.stringify(store.getState().username));
-    console.log("from store [usersData]:" + JSON.stringify(store.getState().usersData));
-    console.log("from store [userData]:" + JSON.stringify(store.getState().userData));
-    console.log("from store [eventsData]:" + JSON.stringify(store.getState().eventsData));
-    console.log("from store [itemsData]:" + JSON.stringify(store.getState().itemsData));
-    console.log("-----------------");
-})
-
 export default store;
+

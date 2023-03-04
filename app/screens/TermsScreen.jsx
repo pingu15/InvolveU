@@ -1,6 +1,11 @@
 import React from "react";
 import { View, Text } from "react-native";
 
+/**
+ * Screen displays the terms and privacy policy of the app.
+ * 
+ * @returns {JSX.Element} The terms screens
+ */
 export default function TermsScreen() {
   return (
     <View style={{ margin: "5%" }}>

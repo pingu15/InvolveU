@@ -3,6 +3,11 @@ import { View, Text, StyleSheet, ScrollView, Image } from "react-native";
 import RankIcon from "../assets/rankIcon.png";
 import { useSelector } from "react-redux";
 
+/**
+ * The rank screen is a leaderboard of all users points within the user's grade.
+ * 
+ * @returns {JSX.Element} The rank screen
+ */
 export default function RankScreen() {
   const user = useSelector((state) => state.userData);
   let grade = [];

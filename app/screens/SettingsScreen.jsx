@@ -13,6 +13,13 @@ import { logout } from "../utils/ReduxStore";
 import { useSelector, useDispatch } from "react-redux";
 import { Ionicons } from '@expo/vector-icons'; 
 
+/**
+ * Displays the user's username and email.
+ * 
+ * @param {Object} user the user object
+ * 
+ * @returns {JSX.Element} the profile component
+ */
 function Profile({ user }) {
   return (
     <View style={styles.profile}>
@@ -42,6 +49,11 @@ function Profile({ user }) {
   );
 }
 
+/**
+ * Separator component. Simply displays a horizontal line.
+ * 
+ * @returns {JSX.Element} the separator component
+ */
 function Separator() {
   return (
     <View
@@ -54,6 +66,14 @@ function Separator() {
   );
 }
 
+/**
+ * Uses a TouchableOpacity to display toggleable content.
+ * 
+ * @param {String} option the text to display on the button 
+ * @param {JSX.Element} content the content to display when the button is pressed
+ * 
+ * @returns {JSX.Element} the toggleable content component
+ */
 function ToggleableContent({ option, content }) {
   const [visible, setVisible] = useState(false);
 
@@ -74,6 +94,13 @@ function ToggleableContent({ option, content }) {
   );
 }
 
+/**
+ * Button that navigates to the term screen.
+ * 
+ * @param {Object} navigation the navigation object
+ * 
+ * @returns {JSX.Element} the terms button component
+ */
 function TermsButton({navigation}) {
   return (
     <TouchableOpacity style={styles.bottombutton} onPress={() => navigation.navigate("Terms")}>
@@ -84,6 +111,13 @@ function TermsButton({navigation}) {
   );
 }
 
+/**
+ * The settings screen contains the user's profile, some general information, and a logout button.
+ * 
+ * @param {Object} navigation the navigation object
+ * 
+ * @returns {JSX.Element} the settings screen
+ */
 export default function SettingsScreen({ navigation }) {
   const user = useSelector((state) => state.userData);
 

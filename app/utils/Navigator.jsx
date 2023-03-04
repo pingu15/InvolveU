@@ -16,32 +16,25 @@ import TermsScreen from '../screens/TermsScreen';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function TabNav({navigation}) {
-    return (
-        <Tab.Navigator>
-            <Tab.Screen name="Home" options={{
-              tabBarIcon: ({ color, size }) => (
-                <Ionicons name="home" size={size} color={color} />
-              ),
-            }}>
-              {() => <HomeScreen navigation={navigation} />}
-            </Tab.Screen>
-            <Tab.Screen name="Events" component={EventsScreen} options={{
-              tabBarIcon: ({ color, size }) => (
-                <Ionicons name="calendar-outline" size={size} color={color} />
-              ),
-            }}/> 
-            <Tab.Screen name="Settings" options={{
-              tabBarIcon: ({ color, size }) => (
-                <Ionicons name="cog-outline" size={size} color={color} />
-              ),
-            }}>
-              {() => <SettingsScreen navigation={navigation} />}
-            </Tab.Screen>
-        </Tab.Navigator>
-    );
-}
-
+/**
+ * Screens are organized in a stack navigator, nesting the tab navigator containing 
+ * the home, events, and settings screens.
+ * 
+ * Overall the structure is as follows:
+ * Login
+ * Signup
+ * TabNav
+ *  - Home
+ *  - Events
+ *  - Settings
+ * Prize
+ * Rank
+ * Terms
+ * 
+ * Screens may navigate to other screens at any time using the navigation prop passed to them.
+ * 
+ * @returns {JSX.Element} the navigator
+ */
 export default function Navigator() {
   return (
     <Stack.Navigator>
@@ -65,4 +58,35 @@ export default function Navigator() {
   );
 }
 
-
+/**
+ * The tab navigator contains the home, events, and settings screens.
+ * 
+ * @param {Object} navigation the navigation prop passed to the screen
+ * 
+ * @returns {JSX.Element} the tab navigator
+ */
+function TabNav({navigation}) {
+  return (
+      <Tab.Navigator>
+          <Tab.Screen name="Home" options={{
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="home" size={size} color={color} />
+            ),
+          }}>
+            {() => <HomeScreen navigation={navigation} />}
+          </Tab.Screen>
+          <Tab.Screen name="Events" component={EventsScreen} options={{
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="calendar-outline" size={size} color={color} />
+            ),
+          }}/> 
+          <Tab.Screen name="Settings" options={{
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="cog-outline" size={size} color={color} />
+            ),
+          }}>
+            {() => <SettingsScreen navigation={navigation} />}
+          </Tab.Screen>
+      </Tab.Navigator>
+  );
+}

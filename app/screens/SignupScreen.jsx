@@ -19,6 +19,13 @@ import {
   TouchableOpacity,
 } from "react-native";
 
+/**
+ * The signup screen allows the user to create a new account.
+ * 
+ * @param {Object} navigation the navigation object
+ * 
+ * @returns {JSX.Element} the signup screen
+ */
 export default function SignupScreen({ navigation }) {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
@@ -31,6 +38,9 @@ export default function SignupScreen({ navigation }) {
 
   const grades = [9, 10, 11, 12];
 
+  /**
+   * Handles the signup button press. Errortrapping ensures the email is valid and the passwords match.
+   */
   const handleSignup = () => {
     if (signingUp) return;
     updateSignupText("Signing Up...");
@@ -65,6 +75,11 @@ export default function SignupScreen({ navigation }) {
       .catch((err) => console.log(err));
   };
 
+  /**
+   * Posts the user's information to the server to create a new account. If successful, the user is logged in.
+   * 
+   * @returns {Promise} a promise that resolves to a string
+   */
   function signup() {
     return new Promise((resolve, reject) => {
       fetch(`${config.server}/signup/`, {
@@ -95,6 +110,12 @@ export default function SignupScreen({ navigation }) {
     });
   }
 
+  /**
+   * Attempts to log in user by posting the username and password to the server.
+   * Server will return a refresh token and an access token if successful and a message indicating the status.
+   * 
+   * @returns {Promise} A promise that resolves to a string indicating the result of the login attempt.
+   */
   function login() {
     return new Promise((resolve, reject) => {
       fetch(`${config.server}/api/token/`, {
