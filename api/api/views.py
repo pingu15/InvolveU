@@ -20,7 +20,7 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.conf import settings
 
-from datetime import datetime
+from datetime import datetime, timezone
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -68,19 +68,13 @@ def getRoutes(request):
     return Response(routes)
 
 
-def days_between(d1, d2):
-    d1 = datetime.strptime(d1, "%Y-%m-%d")
-    d2 = datetime.strptime(d2, "%Y-%m-%d")
-    return abs((d2 - d1).days)
-
-
 def winners_view(request):
     if not request.user.is_authenticated or (not request.user.is_staff):
         raise PermissionDenied
     context = {}
     if len(LastWinner.objects.all()) > 0:
-        context['date'] = days_between(LastWinner.objects.all()[
-                                       0].date, datetime.now())
+        delta = datetime.now(timezone.utc)-LastWinner.objects.all()[0].date
+        context['date'] = delta.days
     else:
         context['date'] = 0
     if request.method == "POST":
