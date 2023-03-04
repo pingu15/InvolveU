@@ -6,7 +6,12 @@ import Star from "../assets/star.png";
 import { useSelector } from "react-redux";
 
 export default function PrizeScreen() {
-  let prizeItems = useSelector((state) => state.itemsData);
+  let prizeItems = [];
+  let tmp = useSelector((state) => state.itemsData);
+  prizeItems = Array.from(tmp);
+  prizeItems = prizeItems.sort(function (a, b) {
+    return a.cost < b.cost ? -1 : 1;
+  });
   let userPoints = useSelector((state) => state.userData.points);
   return (
     <View style={styles.container}>
@@ -61,7 +66,9 @@ function PrizeItem({ itemName, points, image, userPoints }) {
             source={Lock}
           />
         )}
-        <Text style={[styles.h2, { marginTop: 10 }]}>{itemName}</Text>
+        <Text style={[styles.h2, { marginTop: 15, marginLeft: "5%" }]}>
+          {itemName}
+        </Text>
       </View>
       <View style={styles.row}>
         <Image

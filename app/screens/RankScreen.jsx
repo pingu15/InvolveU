@@ -40,7 +40,6 @@ export default function RankScreen() {
                     marginLeft: "5%",
                     marginBottom: "3%",
                     borderColor: "#808d9e",
-                    borderWidth: 1,
                     alignItems: "flex-start",
                     justifyContent: "space-between",
                   }}
