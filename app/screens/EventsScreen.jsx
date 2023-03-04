@@ -3,6 +3,9 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'rea
 import { Calendar, CalendarList } from 'react-native-calendars';
 import { useSelector } from 'react-redux';
 import EventIcon from '../assets/eventIcon.png';
+import LocIcon from '../assets/locIcon.png';
+import TimeIcon from '../assets/timeIcon.png';
+import StarIcon from '../assets/starIcon.png';
 
 const staticCalendarProps = {
   showSixWeeks: true,
@@ -41,11 +44,34 @@ function YMDToLong(ymd) {
 }
 
 function Event({ eventData }) {
+  let time = JSON.stringify(eventData.date).split('T')[1].replace('Z', '').replace('"', '').substring(0, 5)
+  if(parseInt(time.substring(0, 2)) > 11){
+    time = parseInt(time.substring(0, 2)) - 12 + time.substring(2, 5) + " pm"
+  }
+  else if(parseInt(time.substring(0, 1)) == 0 && parseInt(time.substring (1, 2)) == 0){
+    time = 12 + time.substring(2, 5) + " am"
+  }
+  else if(parseInt(time.substring(0, 1)) == 0){
+    time = time.substring (1, 5) + " am"
+  }
+  else{
+    time = time + " am"
+  }
   return (
     <View style={styles.eventcontainer}>
-      <Text style = {styles.h2}>{JSON.stringify(eventData.title)}</Text>
-      <Text>{JSON.stringify(eventData.location)}</Text>
-      <Text>{JSON.stringify(eventData.points)}</Text>
+      <Text style = {styles.h2}>{JSON.stringify(eventData.title).replaceAll('"', '')}</Text>
+      <View style = {styles.row}>
+        <Image style = {styles.icon2} source = {LocIcon}/>
+        <Text style = {styles.body}>{JSON.stringify(eventData.location).replaceAll('"', '')}</Text>
+      </View>
+      <View style = {styles.row}>
+        <Image style = {styles.icon2} source = {TimeIcon}/>
+        <Text style = {styles.body}>{time}</Text>
+      </View>
+      <View style = {styles.row}>
+        <Image style = {styles.icon2} source = {StarIcon}/>
+        <Text style = {styles.body}>{JSON.stringify(eventData.points).replaceAll('"', '')} points</Text>
+      </View>
     </View>
   )
 }
@@ -106,7 +132,7 @@ export default function EventsScreen() {
 
   return (
     <View style={styles.container}>
-        <ScrollView contentContainerStyle={styles.container}>
+        <ScrollView contentContainerStyle={[styles.container, {paddingBottom: '5%'}]}>
         <View style={styles.calendarcontainer}>
           <View style={{height: "3%"}}></View>
           <Calendar 
@@ -187,7 +213,7 @@ export default function EventsScreen() {
         </View>
         <View style={styles.eventscontainer}>
           <View style={styles.row}>
-            <Image style = {styles.icon} source = {EventIcon}/>
+            <Image style = {styles.icon1} source = {EventIcon}/>
             <Text style = {styles.h1}>Events</Text>
           </View>
           <Text style={styles.text}>{YMDToLong(selectedDay)}</Text>
@@ -257,14 +283,22 @@ const styles = StyleSheet.create({
     margin: '5%',
   },
   body:{
-    fontSize: 15
+    fontSize: 15,
+    marginLeft: '5%',  
+    fontWeight: 'light',
+    marginBottom: '5%'
   },
   row: {
     flexDirection: 'row',
   },
-  icon: {
+  icon1: {
     height: 36,
     width: 36,
     margin: '5%'
   },
+  icon2: {
+    height: 21,
+    width: 21,
+    marginLeft: '5%'
+  }
 });

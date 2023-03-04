@@ -55,7 +55,7 @@ export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <ScrollView
-        contentContainerStyle={[styles.container, { paddingBottom: "5%" }]}
+        contentContainerStyle={styles.container}
       >
         <Summary user={user} />
         <Rank
@@ -169,6 +169,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#1D1E25",
     marginLeft: "5%",
+    marginBottom: '5%'
   },
   number2: {
     fontSize: 18,
