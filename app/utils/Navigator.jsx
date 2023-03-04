@@ -8,7 +8,7 @@ import LoginScreen from '../screens/LoginScreen';
 import HomeScreen from '../screens/HomeScreen';
 import EventsScreen from '../screens/EventsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-import StoreScreen from '../screens/StoreScreen';
+import PrizeScreen from '../screens/PrizeScreen';
 import SignupScreen from '../screens/SignupScreen';
 import RankScreen from '../screens/RankScreen';
 
@@ -51,8 +51,8 @@ export default function Navigator() {
         options={{ headerShown: false, gestureEnabled: false }}>
           {({ navigation }) => <TabNav navigation={navigation} />}
       </Stack.Screen>
-      <Stack.Screen options={{headerBackTitle: "Home"}} name="Store">
-        {({ navigation }) => <StoreScreen navigation={navigation} />}
+      <Stack.Screen options={{headerBackTitle: "Home"}} name="Prize">
+        {({ navigation }) => <PrizeScreen navigation={navigation} />}
       </Stack.Screen>
       <Stack.Screen options={{headerBackTitle: "Home"}} name="Rank">
         {({ navigation }) => <RankScreen navigation={navigation} />}

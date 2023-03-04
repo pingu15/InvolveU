@@ -66,7 +66,7 @@ export default function HomeScreen({ navigation }) {
           allGradesLength={allGrades.length}
           allGradesIdx={allGradesIdx + 1}
         />
-        <Store navigation={navigation} />
+        <Prize navigation={navigation} />
       </ScrollView>
     </View>
   );
@@ -130,15 +130,15 @@ function Rank({
   );
 }
 
-function Store({ navigation }) {
+function Prize({ navigation }) {
   return (
     <TouchableOpacity
       style={[styles.box, { height: "12%" }, { marginTop: "0%" }]}
-      onPress={() => navigation.navigate("Store")}
+      onPress={() => navigation.navigate("Prize")}
     >
       <View style={styles.rank}>
         <Image style={styles.icon} source={StoreIcon} />
-        <Text style={styles.h1}>Store</Text>
+        <Text style={styles.h1}>Prizes</Text>
         <MaterialIcons
           name="keyboard-arrow-right"
           size={30}

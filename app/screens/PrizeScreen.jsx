@@ -5,8 +5,8 @@ import StoreIcon from "../assets/storeIcon.png";
 import Star from "../assets/star.png";
 import { useSelector } from "react-redux";
 
-export default function StoreScreen() {
-  let shopItems = useSelector((state) => state.itemsData);
+export default function PrizeScreen() {
+  let prizeItems = useSelector((state) => state.itemsData);
   let userPoints = useSelector((state) => state.userData.points);
   return (
     <View style={styles.container}>
@@ -14,9 +14,9 @@ export default function StoreScreen() {
         <View style={styles.box}>
           <View style={styles.row}>
             <Image style={styles.icon} source={StoreIcon} />
-            <Text style={styles.h1}>Store</Text>
+            <Text style={styles.h1}>Prizes</Text>
           </View>
-          {shopItems.map((item) => {
+          {prizeItems.map((item) => {
             return (
               <View
                 key={item.id}
@@ -31,7 +31,7 @@ export default function StoreScreen() {
                   alignItems: "left",
                 }}
               >
-                <ShopItem
+                <PrizeItem
                   itemName={item.name}
                   points={item.cost}
                   image={item.photo}
@@ -46,7 +46,7 @@ export default function StoreScreen() {
   );
 }
 
-function ShopItem({ itemName, points, image, userPoints }) {
+function PrizeItem({ itemName, points, image, userPoints }) {
   return (
     <View style={styles.shopBox}>
       <View style={styles.row}>
