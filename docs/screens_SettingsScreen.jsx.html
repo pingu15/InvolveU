@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: screens/SettingsScreen.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: screens/SettingsScreen.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  Linking,
+} from "react-native";
+
+import { logout } from "../utils/ReduxStore";
+import { useSelector, useDispatch } from "react-redux";
+import { Ionicons } from '@expo/vector-icons'; 
+
+/**
+ * Displays the user's username and email.
+ * 
+ * @param {Object} user the user object
+ * 
+ * @returns {JSX.Element} the profile component
+ */
+function Profile({ user }) {
+  return (
+    &lt;View style={styles.profile}>
+      &lt;Text
+        style={{
+          fontSize: 20,
+          fontWeight: "bold",
+          color: "#000000",
+          marginHorizontal: "7%",
+          marginTop: "6%",
+          marginBottom: "3%",
+        }}
+      >
+        {user.username}
+      &lt;/Text>
+      &lt;Text
+        style={{
+          fontSize: 12,
+          color: "#a6a6a6",
+          marginHorizontal: "7%",
+          marginBottom: "6%",
+        }}
+      >
+        {user.email == "" ? "No Email" : user.email}
+      &lt;/Text>
+    &lt;/View>
+  );
+}
+
+/**
+ * Separator component. Simply displays a horizontal line.
+ * 
+ * @returns {JSX.Element} the separator component
+ */
+function Separator() {
+  return (
+    &lt;View
+      style={{
+        width: "85%",
+        borderBottomColor: "#d1d1d1",
+        borderBottomWidth: 0.5,
+      }}
+    >&lt;/View>
+  );
+}
+
+/**
+ * Uses a TouchableOpacity to display toggleable content.
+ * 
+ * @param {String} option the text to display on the button 
+ * @param {JSX.Element} content the content to display when the button is pressed
+ * 
+ * @returns {JSX.Element} the toggleable content component
+ */
+function ToggleableContent({ option, content }) {
+  const [visible, setVisible] = useState(false);
+
+  function toggleVisibility() {
+    setVisible(!visible);
+  }
+
+  return (
+    &lt;View style={styles.togglecontent}>
+      &lt;TouchableOpacity onPress={toggleVisibility} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        &lt;Text style={{ fontSize: 20, fontWeight: "bold", color: "#000000" }}>
+          {option}
+        &lt;/Text>
+        &lt;Ionicons name={visible ? "chevron-up" : "chevron-down"} size={18} />
+      &lt;/TouchableOpacity>
+      {visible &amp;&amp; &lt;View style={{ flexGrow: visible ? 1 : 0 }}>{content}&lt;/View>}
+    &lt;/View>
+  );
+}
+
+/**
+ * Button that navigates to the term screen.
+ * 
+ * @param {Object} navigation the navigation object
+ * 
+ * @returns {JSX.Element} the terms button component
+ */
+function TermsButton({navigation}) {
+  return (
+    &lt;TouchableOpacity style={styles.bottombutton} onPress={() => navigation.navigate("Terms")}>
+      &lt;Text style={{ fontSize: 16, color: "#2280ff" }}>
+        Terms and Privacy Policy
+      &lt;/Text>
+    &lt;/TouchableOpacity>
+  );
+}
+
+/**
+ * The settings screen contains the user's profile, some general information, and a logout button.
+ * 
+ * @param {Object} navigation the navigation object
+ * 
+ * @returns {JSX.Element} the settings screen
+ */
+export default function SettingsScreen({ navigation }) {
+  const user = useSelector((state) => state.userData);
+
+  const handleLogout = () => {
+    AsyncStorage.clear().then(() => {
+      navigation.navigate("Login");
+    });
+  };
+
+  return (
+    &lt;View style={styles.container}>
+      &lt;ScrollView contentContainerStyle={styles.container}>
+        &lt;View style={styles.overview}>
+          &lt;Profile user={user} />
+          &lt;Separator />
+
+          &lt;View style={styles.togglecontentcontainer}>
+            &lt;ToggleableContent option={"How to Use"}
+            content={
+            &lt;Text>{`
+Welcome to InvolveU! This app is the hub for all your school's events.
+
+In the home page, you can see the number of points you have earned, and where you stand among your peers.
+
+In the events page, you can see a calendar of events and their details, such as the number of points you can earn by participating.
+
+Students attending events will be awarded the points at the end of each quarter, which can be used to redeem prizes in the prizes page.
+
+Teachers in the school are tasked with adding students by username at each event to ensure validity.
+            `}
+            &lt;/Text>
+            }
+            />
+            &lt;ToggleableContent
+              option={"About the Developers"}
+              content={
+              &lt;Text>{`
+InvolveU was developed by a team of 3 students from William Lyon Mackenzie Collegiate Institute in Toronto, Canada.
+
+Please feel free to contact us with any questions or concerns.
+
+Copyright C 2023 by Annie Wong, Shane Chen, Max Sun
+              `}&lt;/Text>
+            }
+            />
+          &lt;/View>
+          &lt;Separator />
+
+          &lt;View style={styles.bottombuttonscontainer}>
+            &lt;TermsButton navigation={navigation}/>
+            &lt;TouchableOpacity
+              style={styles.bottombutton}
+              onPress={handleLogout}
+            >
+              &lt;Text style={{ fontSize: 16, color: "#ff5555" }}>Logout&lt;/Text>
+            &lt;/TouchableOpacity>
+          &lt;/View>
+        &lt;/View>
+      &lt;/ScrollView>
+    &lt;/View>
+  );
+}
+
+const styles = StyleSheet.create({
+  bottombuttonscontainer: {
+    width: "85%",
+    marginBottom: "8%",
+    overflow: "hidden",
+  },
+  bottombutton: {
+    marginTop: "8%",
+  },
+  container: {
+    flexGrow: 1,
+    backgroundColor: "#fafafa",
+  },
+  overview: {
+    flexGrow: 1,
+    margin: "5%",
+    width: "90%",
+    borderRadius: 8,
+    backgroundColor: "#ffffff",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    alignSelf: "center",
+  },
+  profile: {
+    margin: "8%",
+    width: "85%",
+    borderRadius: 8,
+    overflow: "hidden",
+    backgroundColor: "#fafafa",
+  },
+  togglecontentcontainer: {
+    width: "85%",
+    marginBottom: "8%",
+    overflow: "hidden",
+  },
+  togglecontent: {
+    marginTop: "8%",
+  },
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="YMDDate.html">YMDDate</a></li></ul><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#AppProvider">AppProvider</a></li><li><a href="global.html#Event">Event</a></li><li><a href="global.html#GetEvents">GetEvents</a></li><li><a href="global.html#GetItems">GetItems</a></li><li><a href="global.html#GetRefreshToken">GetRefreshToken</a></li><li><a href="global.html#GetUsers">GetUsers</a></li><li><a href="global.html#Prize">Prize</a></li><li><a href="global.html#PrizeItem">PrizeItem</a></li><li><a href="global.html#Profile">Profile</a></li><li><a href="global.html#Rank">Rank</a></li><li><a href="global.html#Separator">Separator</a></li><li><a href="global.html#Summary">Summary</a></li><li><a href="global.html#TabNav">TabNav</a></li><li><a href="global.html#TermsButton">TermsButton</a></li><li><a href="global.html#ToggleableContent">ToggleableContent</a></li><li><a href="global.html#YMDToLong">YMDToLong</a></li><li><a href="global.html#dateToYMD">dateToYMD</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Mar 04 2023 11:37:49 GMT-0500 (Eastern Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
