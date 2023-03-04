@@ -102,14 +102,34 @@ export default function SettingsScreen({ navigation }) {
           <Separator />
 
           <View style={styles.togglecontentcontainer}>
-            <ToggleableContent option={"How to Use"} content={<Text>a</Text>} />
-            <ToggleableContent
-              option={"Change Grade"}
-              content={<Text>a</Text>}
+            <ToggleableContent option={"How to Use"}
+            content={
+            <Text>{`
+Welcome to InvolveU! This app is the hub for all your school's events.
+
+In the home page, you can see the number of points you have earned, and where you stand among your peers.
+
+In the events page, you can see a calendar of events and their details, such as the number of points you can earn by participating.
+
+Students attending events will be awarded the points at the end of each quarter, which can be used to redeem prizes in the prizes page.
+
+Teachers in the school are tasked with adding students by username at each event to ensure validity.
+            `}
+            </Text>
+            }
             />
             <ToggleableContent
               option={"About the Developers"}
-              content={<Text>a</Text>}
+              content={
+              <Text>{`
+InvolveU was developed by a team of 3 students from William Lyon Mackenzie Collegiate Institute in Toronto, Canada.
+
+Please feel free to contact us at contact@involveu.com with any questions or concerns.
+
+Copyright C 2023 by Annie Wong, Shane Chen, Max Sun
+
+              `}</Text>
+            }
             />
           </View>
           <Separator />
