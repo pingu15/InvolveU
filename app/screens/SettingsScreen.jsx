@@ -74,12 +74,9 @@ function ToggleableContent({ option, content }) {
   );
 }
 
-function TermsButton() {
-  const handleOpenTerms = () => {
-    Linking.openURL("https://example.com/");
-  };
+function TermsButton({navigation}) {
   return (
-    <TouchableOpacity style={styles.bottombutton} onPress={handleOpenTerms}>
+    <TouchableOpacity style={styles.bottombutton} onPress={() => navigation.navigate("Terms")}>
       <Text style={{ fontSize: 16, color: "#2280ff" }}>
         Terms and Privacy Policy
       </Text>
@@ -136,7 +133,7 @@ Copyright C 2023 by Annie Wong, Shane Chen, Max Sun
           <Separator />
 
           <View style={styles.bottombuttonscontainer}>
-            <TermsButton />
+            <TermsButton navigation={navigation}/>
             <TouchableOpacity
               style={styles.bottombutton}
               onPress={handleLogout}

@@ -11,6 +11,7 @@ import SettingsScreen from '../screens/SettingsScreen';
 import PrizeScreen from '../screens/PrizeScreen';
 import SignupScreen from '../screens/SignupScreen';
 import RankScreen from '../screens/RankScreen';
+import TermsScreen from '../screens/TermsScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -56,6 +57,9 @@ export default function Navigator() {
       </Stack.Screen>
       <Stack.Screen options={{headerBackTitle: "Home"}} name="Rank">
         {({ navigation }) => <RankScreen navigation={navigation} />}
+      </Stack.Screen>
+      <Stack.Screen options={{headerBackTitle: "Settings"}} name="Terms">
+        {({ navigation }) => <TermsScreen navigation={navigation} />}
       </Stack.Screen>
     </Stack.Navigator>
   );
