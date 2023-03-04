@@ -42,7 +42,7 @@ export default function RankScreen() {
                     borderColor: "#808d9e",
                     borderWidth: 1,
                     alignItems: "flex-start",
-                    justifyContent: "flex-start",
+                    justifyContent: "space-between",
                   }}
                 >
                   <Text style={styles.username}>
