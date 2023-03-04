@@ -14,6 +14,7 @@ import {
   setUsername as setReduxUsername,
   setUserData,
 } from "../utils/ReduxStore";
+import { GetRefreshToken } from "../utils/InvolveUApi";
 
 export default function LoginScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -25,18 +26,28 @@ export default function LoginScreen({ navigation }) {
   let users = useSelector((state) => state.usersData);
   React.useEffect(() => {
     AsyncStorage.getItem("@username").then((username) => {
-      console.log("from async storage: " + username);
-      if (username != null) {
-        dispatch(setReduxUsername(username));
-        AsyncStorage.getItem("@user").then((u) => {
-          let user = JSON.parse(u);
-          dispatch(setUserData(user));
+      if (username == null) return;
+      AsyncStorage.getItem("@refreshtoken").then((refreshtoken) => {
+        if (refreshtoken == null) return;
+        console.log(refreshtoken);
+        GetRefreshToken(refreshtoken).then((val) => {
+          if (val.detail) {
+            AsyncStorage.clear();
+          } else {
+            AsyncStorage.setItem("@refreshtoken", val.refresh);
+            AsyncStorage.setItem("@accesstoken", val.access);
+            dispatch(setReduxUsername(username));
+            AsyncStorage.getItem("@user").then((u) => {
+              let user = JSON.parse(u);
+              dispatch(setUserData(user));
+            });
+            updateLoginText("Loading App...");
+            loggingIn = false;
+            updateLoginText("");
+            navigation.navigate("TabNav");
+          }
         });
-        updateLoginText("Loading App...");
-        loggingIn = false;
-        updateLoginText("");
-        navigation.navigate("TabNav");
-      }
+      });
     });
   }, []);
 
@@ -82,6 +93,8 @@ export default function LoginScreen({ navigation }) {
         .then((response) => response.json())
         .then((json) => {
           if (json.access && json.refresh) {
+            console.log(typeof json.access);
+            console.log(typeof json.refresh);
             AsyncStorage.setItem("@accesstoken", json.access)
               .then(() => {
                 AsyncStorage.setItem("@refreshtoken", json.refresh)

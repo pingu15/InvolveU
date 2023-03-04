@@ -44,3 +44,24 @@ export function GetItems() {
       });
   });
 }
+
+export function GetRefreshToken(ref) {
+  return new Promise((resolve, reject) => {
+    fetch(`${config.server}/api/token/refresh/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        refresh: ref,
+      }),
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        resolve(json);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+}
