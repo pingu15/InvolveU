@@ -6,6 +6,8 @@ Teachers in the school are tasked with adding students by username at each event
 
 The initial app design can be found at https://www.figma.com/file/204M6ZpTg2ZjOxQPPir3OP/InvolveU?node-id=0%3A1.
 
+The documentation for the app can be found at https://pingu15.github.io/InvolveU/.
+
 ## Api
 
 The api can be found at https://involveu.up.railway.app/api. Admins (teachers) can access the admin panel at https://involveu.up.railway.app/admin.
