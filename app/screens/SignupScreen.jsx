@@ -49,7 +49,6 @@ export default function SignupScreen({ navigation }) {
           signingUp = false;
           updateSignupText("");
           GetUsers().then((users) => {
-            AsyncStorage.setItem("@users", JSON.stringify(users));
             dispatch(setUsersData(users));
             users.forEach((user) => {
               if (user.username == username) {

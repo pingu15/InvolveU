@@ -64,7 +64,7 @@ export default function LoginScreen({ navigation }) {
           loggingIn = false;
         }
       })
-      .catch((err) => console.log("4" + err));
+      .catch((err) => console.log(err));
   };
 
   function login() {
