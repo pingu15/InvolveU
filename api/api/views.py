@@ -84,14 +84,18 @@ def winners_view(request):
         gr10 = User.objects.all().filter(grade=10)
         gr9 = User.objects.all().filter(grade=9)
         all = User.objects.all()
-        if len(gr12) > 0:
-            winners.append(random.choice(gr12))
-        if len(gr11) > 0:
-            winners.append(random.choice(gr11))
-        if len(gr10) > 0:
-            winners.append(random.choice(gr10))
-        if len(gr9) > 0:
-            winners.append(random.choice(gr9))
+        w12 = f(gr12)
+        for w in w12:
+            winners.append(w)
+        w11 = f(gr11)
+        for w in w11:
+            winners.append(w)
+        w10 = f(gr10)
+        for w in w10:
+            winners.append(w)
+        w9 = f(gr9)
+        for w in w9:
+            winners.append(w)
         if len(all) > 0:
             winners.append(random.choice(all))
         for winner in winners:
@@ -113,3 +117,18 @@ def winners_view(request):
             user.points = 0
             user.save()
     return render(request, "winners.html", context)
+
+
+def f(users):
+    if len(users) > 0:
+        max = users[0].points
+        res = []
+        for user in users:
+            if user.points > max:
+                max = user.points
+        for user in users:
+            if user.points == max:
+                res.append(user)
+        return res
+    else:
+        return []
