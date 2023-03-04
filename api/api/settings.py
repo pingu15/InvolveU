@@ -187,6 +187,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "accounts.User"
 
-CSRF_TRUSTED_ORIGINS = ['https://involeu.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://involveu.up.railway.app']
 
 CORS_ALLOW_ALL_ORIGINS = True
