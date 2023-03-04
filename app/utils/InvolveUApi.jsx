@@ -5,8 +5,10 @@ export function GetUsers() {
     fetch(`${config.server}/api/users/`, {
       method: "GET",
     })
-      .then((response) => {
-        resolve(response.json());
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+        resolve(json);
       })
       .catch((err) => {
         console.log(err);
@@ -19,8 +21,10 @@ export function GetEvents() {
     fetch(`${config.server}/api/events/`, {
       method: "GET",
     })
-      .then((response) => {
-        resolve(response.json());
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+        resolve(json);
       })
       .catch((err) => {
         console.log(err);
@@ -33,8 +37,10 @@ export function GetItems() {
     fetch(`${config.server}/api/items/`, {
       method: "GET",
     })
-      .then((response) => {
-        resolve(response.json());
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+        resolve(json);
       })
       .catch((err) => {
         console.log(err);
