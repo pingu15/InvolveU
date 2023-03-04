@@ -1,34 +1,43 @@
-import React, { useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import config from "../config.json";
 
-export async function GetUsers() {
-  try {
-    const response = await fetch(`${config.server}/api/users/`, { method: "GET" });
-    const json = await response.json();
-    return json;
-  } catch (error) {
-    console.log(error);
-  }
+export function GetUsers() {
+  return new Promise((resolve, reject) => {
+    fetch(`${config.server}/api/users/`, {
+      method: "GET",
+    })
+      .then((response) => {
+        resolve(response.json());
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
 }
 
-export async function GetEvents() {
-  try {
-    const response = await fetch(`${config.server}/api/events/`, { method: "GET" });
-    const json = await response.json();
-    return json;
-  } catch (error) {
-    console.log(error);
-  }
+export function GetEvents() {
+  return new Promise((resolve, reject) => {
+    fetch(`${config.server}/api/events/`, {
+      method: "GET",
+    })
+      .then((response) => {
+        resolve(response.json());
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
 }
 
-export async function GetItems() {
-  try {
-    const response = await fetch(`${config.server}/api/items/`, { method: "GET" });
-    const json = await response.json();
-    console.log("PEEPEEPOOPOO");
-    return json;
-  } catch(error) {
-    console.log(error);
-  }
+export function GetItems() {
+  return new Promise((resolve, reject) => {
+    fetch(`${config.server}/api/items/`, {
+      method: "GET",
+    })
+      .then((response) => {
+        resolve(response.json());
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
 }

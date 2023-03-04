@@ -5,7 +5,7 @@ const mainSlice = createSlice({
   initialState: {
     username: '',
     usersData: [],
-    userData: {},
+    userData: {username: "Guest", points: 0, grade: 9, email: ""},
     eventsData: [],
     itemsData: [],
   },
