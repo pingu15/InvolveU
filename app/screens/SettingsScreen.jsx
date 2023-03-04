@@ -144,7 +144,10 @@ In the home page, you can see the number of points you have earned, and where yo
 
 In the events page, you can see a calendar of events and their details, such as the number of points you can earn by participating.
 
-Students attending events will be awarded the points at the end of each quarter, which can be used to redeem prizes in the prizes page.
+Students attending events will be awarded points. At the end of each quarter, a random winner and the highest point earner 
+will be selected. 
+
+Points used to redeem prizes in the prizes page at the end of each quarter.
 
 Teachers in the school are tasked with adding students by username at each event to ensure validity.
             `}
@@ -155,11 +158,9 @@ Teachers in the school are tasked with adding students by username at each event
               option={"About the Developers"}
               content={
               <Text>{`
-InvolveU was developed by a team of 3 students from William Lyon Mackenzie Collegiate Institute in Toronto, Canada.
+InvolveU was developed by Max Sun, Shane Chen, and Annie Wong from William Lyon Mackenzie Collegiate Institute in Toronto, Canada.
 
-Please feel free to contact us with any questions or concerns.
-
-Copyright C 2023 by Annie Wong, Shane Chen, Max Sun
+Please feel free to contact involveu@gmail.com with any questions or concerns.
               `}</Text>
             }
             />
