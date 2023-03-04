@@ -11,6 +11,7 @@ import {
 
 import { logout } from "../utils/ReduxStore";
 import { useSelector, useDispatch } from "react-redux";
+import { Ionicons } from '@expo/vector-icons'; 
 
 function Profile({ user }) {
   return (
@@ -62,10 +63,11 @@ function ToggleableContent({ option, content }) {
 
   return (
     <View style={styles.togglecontent}>
-      <TouchableOpacity onPress={toggleVisibility}>
+      <TouchableOpacity onPress={toggleVisibility} style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <Text style={{ fontSize: 20, fontWeight: "bold", color: "#000000" }}>
           {option}
         </Text>
+        <Ionicons name={visible ? "chevron-up" : "chevron-down"} size={18} />
       </TouchableOpacity>
       {visible && <View style={{ flexGrow: visible ? 1 : 0 }}>{content}</View>}
     </View>
@@ -124,10 +126,9 @@ Teachers in the school are tasked with adding students by username at each event
               <Text>{`
 InvolveU was developed by a team of 3 students from William Lyon Mackenzie Collegiate Institute in Toronto, Canada.
 
-Please feel free to contact us at contact@involveu.com with any questions or concerns.
+Please feel free to contact us with any questions or concerns.
 
 Copyright C 2023 by Annie Wong, Shane Chen, Max Sun
-
               `}</Text>
             }
             />
