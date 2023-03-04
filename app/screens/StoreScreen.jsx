@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 
 export default function StoreScreen() {
   let shopItems = useSelector((state) => state.itemsData);
+  let userPoints = useSelector((state) => state.userData.points);
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.container}>
@@ -18,6 +19,7 @@ export default function StoreScreen() {
           {shopItems.map((item) => {
             return (
               <View
+                key={item.id}
                 style={{
                   flexDirection: "row",
                   alignItems: "center",
@@ -33,6 +35,7 @@ export default function StoreScreen() {
                   itemName={item.name}
                   points={item.cost}
                   image={item.photo}
+                  userPoints={userPoints}
                 />
               </View>
             );
@@ -43,19 +46,21 @@ export default function StoreScreen() {
   );
 }
 
-function ShopItem({ itemName, points, image }) {
+function ShopItem({ itemName, points, image, userPoints }) {
   return (
     <View style={styles.shopBox}>
       <View style={styles.row}>
-        <Image
-          style={[
-            styles.icon,
-            { height: 21 },
-            { width: 21 },
-            { marginBottom: 3 },
-          ]}
-          source={Lock}
-        />
+        {points > userPoints ? null : (
+          <Image
+            style={[
+              styles.icon,
+              { height: 21 },
+              { width: 21 },
+              { marginBottom: 3 },
+            ]}
+            source={Lock}
+          />
+        )}
         <Text style={[styles.h2, { marginTop: 10 }]}>{itemName}</Text>
       </View>
       <View style={styles.row}>
@@ -65,7 +70,7 @@ function ShopItem({ itemName, points, image }) {
         />
         <Text>{points} points</Text>
       </View>
-      <Image style={styles.image} source={image} />
+      <Image style={styles.image} source={{ uri: image }} />
     </View>
   );
 }
@@ -82,6 +87,8 @@ const styles = StyleSheet.create({
   },
   image: {
     margin: "5%",
+    width: "90%",
+    height: 200,
   },
   container: {
     flexGrow: 1,
