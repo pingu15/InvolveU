@@ -1,1 +1,2 @@
+release: python manage.py migrate auth && python manage.py migrate --run-syncdb && python manage.py shell --command="from scripts.onLoad import initialLoad; initialLoad();"
 web: gunicorn api.wsgi --log-file -
