@@ -18,13 +18,11 @@ Code documentation for the mobile app can be found at https://pingu15.github.io/
 
 Prerequisites:
 
-- Node.js v8
-- npm v16
+- node v18+
+- npm v9+
 - expo-cli and turtle-cli (can be installed with `npm install -g expo-cli turtle-cli`)
 
-To run the app, clone the repository and enter the `app/` directory.
-
-First run:
+Install dependencies with npm:
 
 ```
 npm i
