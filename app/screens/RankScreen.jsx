@@ -15,7 +15,6 @@ export default function RankScreen() {
   useSelector((state) => state.usersData).forEach((element) => {
     if (element.grade == user.grade) grade.push(element);
   });
-  console.log(grade);
   grade.sort(function (a, b) {
     return a.points > b.points ? -1 : 1;
   });
