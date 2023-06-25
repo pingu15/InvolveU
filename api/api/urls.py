@@ -22,7 +22,7 @@ from django.urls import include, path
 
 from rest_framework import routers
 
-from .views import UserViewSet, EventViewSet, MyTokenObtainPairView, ItemViewSet, LastWinnerViewSet, winners_view
+from .views import UserViewSet, EventViewSet, MyTokenObtainPairView, ItemViewSet, LastWinnerViewSet, winners_view, home_view, report_view
 
 from rest_framework_simplejwt.views import TokenRefreshView
 
@@ -39,6 +39,7 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('events/', include('models.urls')),
     path("signup/", include('accounts.urls')),
-    path('models/', include('models.urls')),
     path('winners/', winners_view, name='winners_view'),
+    path('report/', report_view, name='report_view'),
+    path('', home_view, name='home_view'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

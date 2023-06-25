@@ -1,0 +1,59 @@
+/* CSS */
+.button-59 {
+  align-items: center;
+  background-color: #fff;
+  border: 2px solid #000;
+  box-sizing: border-box;
+  color: #000;
+  cursor: pointer;
+  display: inline-flex;
+  fill: #000;
+  font-family: Inter,sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  height: 60px;
+  justify-content: center;
+  letter-spacing: -.8px;
+  line-height: 24px;
+  min-width: 80px;
+  outline: 0;
+  padding: 0 10px;
+  text-align: center;
+  text-decoration: none;
+  transition: all .3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  border-radius: 0.2rem;
+}
+
+.button-59:focus {
+  color: #171e29;
+}
+
+.button-59:hover {
+    height: 55px;
+    min-width: 90px;
+}
+
+@media (min-width: 768px) {
+  .button-59 {
+    min-width: 100px;
+  }
+}
+
+.form-input-69 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  border-radius: 0.2rem;
+  background-color: rgb(255, 255, 255);
+  border: none;
+  width: 25%;
+}
+
+
+.form-input-69:focus {
+  outline: none;
+}

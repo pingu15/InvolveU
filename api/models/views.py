@@ -1,10 +1,11 @@
 from django.shortcuts import render
-from django.http import Http404, FileResponse
+from django.http import Http404
 from django.core.exceptions import PermissionDenied
-from django.http import HttpResponse
 
 from .models import Event
 from accounts.models import User
+
+from datetime import datetime
 
 # Create your views here.
 
@@ -25,6 +26,10 @@ def edit_events(request, id):
         "id": id,
         "message": ""
     }
+    if not request.user.is_authenticated:
+        context['loginMessage'] = "Not Logged In"
+    else:
+        context['loginMessage'] = "Logged in as " + request.user.username
     if request.method == "POST":
         username = request.POST['username']
         user = User.objects.filter(username=username).first()
@@ -38,10 +43,14 @@ def edit_events(request, id):
             else:
                 message = "User Already Added"
         context["message"] = message
-    return render(request, "index.html", context)
+    return render(request, "event.html", context)
 
-
-def items_view(request, id, type):
-    print("PEFIAOWFJOAWGBOW")
-    img = open('static/photos/'+id+"."+type, 'rb')
-    return FileResponse(img)
+def events_view(request):
+    context = {}
+    if not request.user.is_authenticated:
+        context['loginMessage'] = "Not Logged In"
+    else:
+        context['loginMessage'] = "Logged in as " + request.user.username
+    events = Event.objects.all().filter(date__date=datetime.now().date())
+    context['eventList'] = events
+    return render(request, "events.html", context)

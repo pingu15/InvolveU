@@ -105,22 +105,26 @@
     <main>
       <div class="w-100 overflow-hidden position-relative bg-black text-white aos-init aos-animate" data-aos="fade">
         <div class="position-absolute w-100 h-100 bg-black opacity-75 top-0 start-0"></div>
-        <div class="container py-vh-4 position-relative mt-5 px-vw-5 text-center">
+        <div class="container py-vh-2 position-relative mt-5 px-vw-5 text-center">
           <div class="row d-flex align-items-center justify-content-center py-vh-5">
             <div class="col-12 col-xl-10">
-              <span class="h5 text-secondary fw-lighter">Last selection: {{date}} days ago</span>
-              <h1 class="display-huge mt-3 mb-3 lh-1">Select Quarterly Winners!</h1>
+              <span class="h5 text-primary fw-bolder">Today's Events</span>
             </div>
             <div class="col-12 col-xl-8">
-              <br>
-              <p class="lead text-secondary">Note: all points will reset for a new quarter once you pick winners!</p>
+                {% if eventList|length != 0 %}
+                    <p></p>
+                    <p class="lead text-secondary">Click on an event to add attendees.</p>
+                {% endif %}
             </div>
             <div class="col-12 text-center">
-              <br>
-              <form id="signup-form" method="POST" action="{% url 'winners_view' %}">
-                <input value="Select Winners" class="btn btn-xl btn-light"></input>
-                {% csrf_token %}
-              </form>
+                <p></p>
+                {% if eventList|length == 0 %}
+                    <p class="lead text-secondary">No events today.</p>
+                {% endif %}
+                {% for event in eventList %}
+                    <a href="/events/{{ event.code }}" class="btn btn-xl btn-light">{{ event.title }}</a>
+                    <br><br>
+                {% endfor %}
             </div>
           </div>
         </div>

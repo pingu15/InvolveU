@@ -7,6 +7,7 @@ import Navigator from "./utils/Navigator";
 import { Provider } from "react-redux";
 import store from "./utils/ReduxStore";
 import loadResources from "./utils/loadResources";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 /**
  * Root component of the app.
@@ -16,6 +17,7 @@ import loadResources from "./utils/loadResources";
  * @returns {JSX.Element} The app
  */
 function App() {
+  AsyncStorage.clear();
   const load = loadResources();
   RNStatusBar.setBarStyle("dark-content"); // Sets the status bar text color to white
   return !load ? null : (

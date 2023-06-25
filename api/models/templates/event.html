@@ -10,6 +10,7 @@
     <link rel="icon" href="{% static 'icon.png' %}" />
     <title>InvolveU</title>
     <link rel="stylesheet" href="{% static 'assets/css/theme.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/event.css' %}" />
   
     <style>
       /* inter-300 - latin */
@@ -105,22 +106,23 @@
     <main>
       <div class="w-100 overflow-hidden position-relative bg-black text-white aos-init aos-animate" data-aos="fade">
         <div class="position-absolute w-100 h-100 bg-black opacity-75 top-0 start-0"></div>
-        <div class="container py-vh-4 position-relative mt-5 px-vw-5 text-center">
+        <div class="container py-vh-2 position-relative mt-5 px-vw-5 text-center">
           <div class="row d-flex align-items-center justify-content-center py-vh-5">
             <div class="col-12 col-xl-10">
-              <span class="h5 text-secondary fw-lighter">Last selection: {{date}} days ago</span>
-              <h1 class="display-huge mt-3 mb-3 lh-1">Select Quarterly Winners!</h1>
+                <span class="h5 text-secondary fw-lighter">Add attendees by username</span>
+                <h1 class="display-huge mt-3 mb-3 lh-1">{{title}}</h1>
             </div>
             <div class="col-12 col-xl-8">
-              <br>
-              <p class="lead text-secondary">Note: all points will reset for a new quarter once you pick winners!</p>
+                <p class="lead text-secondary">Date: {{date}}<br>Location: {{location}}<br>Points: {{points}}</p>
             </div>
-            <div class="col-12 text-center">
-              <br>
-              <form id="signup-form" method="POST" action="{% url 'winners_view' %}">
-                <input value="Select Winners" class="btn btn-xl btn-light"></input>
-                {% csrf_token %}
-              </form>
+            <div>
+                <p></p>
+                <form id="signup-form" method="POST" action="{% url 'edit_events' id %}">
+                    <input type="text" name="username" id="username" placeholder="Attendee Username" class="form-input-69"/>
+                    <input type="submit" value="Add" class="button-59"/>
+                    {% csrf_token %}
+                </form>
+                <p class="lead text-secondary">{{message}}</p>
             </div>
           </div>
         </div>

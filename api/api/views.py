@@ -21,7 +21,15 @@ from django.utils.html import strip_tags
 from django.conf import settings
 
 from datetime import datetime, timezone
+from django.shortcuts import redirect
+from django.contrib import admin
 
+import reportlab
+from django.http import FileResponse
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+from reportlab.lib.pagesizes import letter
+import io
+from django.shortcuts import HttpResponse
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -70,8 +78,12 @@ def getRoutes(request):
 
 def winners_view(request):
     if not request.user.is_authenticated or (not request.user.is_staff):
-        raise PermissionDenied
+        return redirect('%s?next=%s' % ('/admin/', request.path))
     context = {}
+    if not request.user.is_authenticated:
+        context['loginMessage'] = "Not Logged In"
+    else:
+        context['loginMessage'] = "Logged in as " + request.user.username
     if len(LastWinner.objects.all()) > 0:
         delta = datetime.now(timezone.utc)-LastWinner.objects.all()[0].date
         context['date'] = delta.days
@@ -132,3 +144,35 @@ def f(users):
         return res
     else:
         return []
+
+def home_view(request):
+    context = {}
+    if not request.user.is_authenticated:
+        context['loginMessage'] = "Not Logged In"
+    else:
+        context['loginMessage'] = "Logged in as " + request.user.username
+    return render(request, "index.html", context)
+
+def report_view(request):
+    buff = io.BytesIO()
+    doc = SimpleDocTemplate(buff, rightMargin=72, leftMargin=72, topMargin=72, bottomMargin=72, pagesize=letter)
+    data = [[]]
+    data[0] = ["First Name", "Last Name", "Username", "Grade", "Points"]
+    sorted = []
+    for user in User.objects.all():
+        if user.is_staff:
+            continue
+        sorted.append(user)
+    sorted.sort(key=lambda x: x.points, reverse=True)
+    for user in sorted:
+        data.append([user.first_name, user.last_name, user.username, user.grade, user.points])
+    table = Table(data)
+    elements = []
+    elements.append(table)
+    doc.build(elements)
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename=report.pdf'
+    response.write(buff.getvalue())
+    buff.close()
+
+    return response
