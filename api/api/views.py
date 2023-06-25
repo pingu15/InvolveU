@@ -85,7 +85,7 @@ def winners_view(request):
     else:
         context['loginMessage'] = "Logged in as " + request.user.username
     if len(LastWinner.objects.all()) > 0:
-        delta = datetime.now(timezone.utc)-LastWinner.objects.all()[0].date
+        delta = datetime.now()-LastWinner.objects.all()[0].date
         context['date'] = delta.days
     else:
         context['date'] = 0
@@ -157,7 +157,7 @@ def report_view(request):
     buff = io.BytesIO()
     doc = SimpleDocTemplate(buff, rightMargin=72, leftMargin=72, topMargin=72, bottomMargin=72, pagesize=letter)
     data = [[]]
-    data[0] = ["First Name", "Last Name", "Username", "Grade", "Points"]
+    data[0] = ["Username", "Grade", "Points"]
     sorted = []
     for user in User.objects.all():
         if user.is_staff:
@@ -165,7 +165,7 @@ def report_view(request):
         sorted.append(user)
     sorted.sort(key=lambda x: x.points, reverse=True)
     for user in sorted:
-        data.append([user.first_name, user.last_name, user.username, user.grade, user.points])
+        data.append([user.username, user.grade, user.points])
     table = Table(data)
     elements = []
     elements.append(table)
