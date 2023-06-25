@@ -58,5 +58,5 @@ def events_view(request):
     return render(request, "events.html", context)
 
 def items_view(request, id, type):
-    img = open('static/photos/'+id+"."+type, 'rb')
+    img = open('static/upload/'+id+"."+type, 'rb')
     return FileResponse(img)

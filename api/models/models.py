@@ -25,7 +25,7 @@ class Event(models.Model):
 class Item(models.Model):
     name = models.TextField()
     cost = models.IntegerField()
-    photo = models.ImageField(upload_to='models/static/photos')
+    photo = models.ImageField(upload_to='static/upload/')
 
     def __str__(self):
         return self.name
