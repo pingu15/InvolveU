@@ -85,7 +85,7 @@ def winners_view(request):
     else:
         context['loginMessage'] = "Logged in as " + request.user.username
     if len(LastWinner.objects.all()) > 0:
-        delta = datetime.now(timezone.utc)-LastWinner.objects.all()[0].date
+        delta = datetime.now()-LastWinner.objects.all()[0].date
         context['date'] = delta.days
     else:
         context['date'] = 0
