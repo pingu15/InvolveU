@@ -8,7 +8,9 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
+import ScrollViewWrapper from "./ScrollViewWrapper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
 /* image imports */
 import Welcomeicon from "../assets/welcomeIcon.png";
 import RankIcon from "../assets/rankIcon.png";
@@ -47,7 +49,7 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <ScrollView
+      <ScrollViewWrapper
         contentContainerStyle={styles.container}
       >
         <Summary user={user} />
@@ -60,7 +62,7 @@ export default function HomeScreen({ navigation }) {
           allGradesIdx={allGradesIdx + 1}
         />
         <Prize navigation={navigation} />
-      </ScrollView>
+      </ScrollViewWrapper>
     </View>
   );
 }

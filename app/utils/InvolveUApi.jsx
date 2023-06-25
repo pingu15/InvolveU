@@ -16,6 +16,7 @@ export function GetUsers() {
       })
       .catch((err) => {
         console.log(err);
+        reject(err);
       });
   });
 }
@@ -36,6 +37,7 @@ export function GetEvents() {
       })
       .catch((err) => {
         console.log(err);
+        reject(err);
       });
   });
 }
@@ -56,6 +58,7 @@ export function GetItems() {
       })
       .catch((err) => {
         console.log(err);
+        reject(err);
       });
   });
 }
@@ -85,6 +88,7 @@ export function GetRefreshToken(ref) {
       })
       .catch((err) => {
         console.log(err);
+        reject(err);
       });
   });
 }
