@@ -49,9 +49,10 @@ export default function LoginScreen({ navigation }) {
             AsyncStorage.setItem("@refreshtoken", val.refresh);
             AsyncStorage.setItem("@accesstoken", val.access);
             dispatch(setReduxUsername(username));
-            AsyncStorage.getItem("@user").then((u) => {
-              let user = JSON.parse(u);
-              dispatch(setUserData(user));
+            users.forEach(user => {
+              if (user.username === username) {
+                  dispatch(setUserData(user));
+              }
             });
             updateLoginText("Loading App...");
             loggingIn = false;

@@ -4,6 +4,7 @@ import Lock from "../assets/lock.png";
 import StoreIcon from "../assets/storeIcon.png";
 import Star from "../assets/star.png";
 import { useSelector } from "react-redux";
+import ScrollViewWrapper from "./ScrollViewWrapper";
 
 /**
  * The prize screen allows the user to view the prizes they can redeem with their points.
@@ -21,7 +22,7 @@ export default function PrizeScreen() {
   let userPoints = useSelector((state) => state.userData.points);
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollViewWrapper contentContainerStyle={styles.container}>
         <View style={styles.box}>
           <View style={styles.row}>
             <Image style={styles.icon} source={StoreIcon} />
@@ -52,7 +53,7 @@ export default function PrizeScreen() {
             );
           })}
         </View>
-      </ScrollView>
+      </ScrollViewWrapper>
     </View>
   );
 }

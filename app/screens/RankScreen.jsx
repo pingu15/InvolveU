@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, ScrollView, Image } from "react-native";
 import RankIcon from "../assets/rankIcon.png";
 import { useSelector } from "react-redux";
+import ScrollViewWrapper from "./ScrollViewWrapper";
 
 /**
  * The rank screen is a leaderboard of all users points within the user's grade.
@@ -14,15 +15,21 @@ export default function RankScreen() {
   useSelector((state) => state.usersData).forEach((element) => {
     if (element.grade == user.grade) grade.push(element);
   });
-  console.log(grade);
   grade.sort(function (a, b) {
     return a.points > b.points ? -1 : 1;
   });
-  let idx = grade.indexOf(user);
-  console.log(grade);
+
+  let idx = -1;
+  for (let i = 0; i < grade.length; ++i) {
+    if (grade[i].id === user.id) {
+      idx = i;
+      break;
+    }
+  }
+
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollViewWrapper contentContainerStyle={styles.container}>
         <View style={styles.box}>
           <View style={styles.row}>
             <Image style={styles.icon} source={RankIcon} />
@@ -58,7 +65,7 @@ export default function RankScreen() {
             })}
           </View>
         </View>
-      </ScrollView>
+      </ScrollViewWrapper>
     </View>
   );
 }

@@ -6,6 +6,7 @@ import EventIcon from '../assets/eventIcon.png';
 import LocIcon from '../assets/locIcon.png';
 import TimeIcon from '../assets/timeIcon.png';
 import StarIcon from '../assets/starIcon.png';
+import ScrollViewWrapper from './ScrollViewWrapper';
 
 // settings that are passed to the calendar
 const staticCalendarProps = {
@@ -164,7 +165,7 @@ export default function EventsScreen() {
 
   return (
     <View style={styles.container}>
-        <ScrollView contentContainerStyle={[styles.container, {paddingBottom: '5%'}]}>
+        <ScrollViewWrapper contentContainerStyle={[styles.container, {paddingBottom: '5%'}]}>
         <View style={styles.calendarcontainer}>
           <View style={{height: "3%"}}></View>
           <Calendar 
@@ -256,7 +257,7 @@ export default function EventsScreen() {
             );
           })}
         </View>
-      </ScrollView>
+      </ScrollViewWrapper>
     </View>
   );
 }
