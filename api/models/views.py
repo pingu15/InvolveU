@@ -7,6 +7,8 @@ from accounts.models import User
 
 from datetime import datetime
 
+from django.http import FileResponse
+
 # Create your views here.
 
 
@@ -54,3 +56,7 @@ def events_view(request):
     events = Event.objects.all().filter(date__date=datetime.now().date())
     context['eventList'] = events
     return render(request, "events.html", context)
+
+def items_view(request, id, type):
+    img = open('static/photos/'+id+"."+type, 'rb')
+    return FileResponse(img)
