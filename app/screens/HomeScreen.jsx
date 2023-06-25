@@ -154,7 +154,7 @@ function Prize({ navigation }) {
   return (
     <TouchableOpacity
       style={[styles.box, { height: "12%" }, { marginTop: "0%" }]}
-      onPress={() => navigation.navigate("Prize")}
+      onPress={() => navigation.navigate("Prizes")}
     >
       <View style={styles.rank}>
         <Image style={styles.icon} source={StoreIcon} />

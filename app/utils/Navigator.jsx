@@ -45,7 +45,7 @@ export default function Navigator() {
         options={{ headerShown: false, gestureEnabled: false }}>
           {({ navigation }) => <TabNav navigation={navigation} />}
       </Stack.Screen>
-      <Stack.Screen options={{headerBackTitle: "Home"}} name="Prize">
+      <Stack.Screen options={{headerBackTitle: "Home"}} name="Prizes">
         {({ navigation }) => <PrizeScreen navigation={navigation} />}
       </Stack.Screen>
       <Stack.Screen options={{headerBackTitle: "Home"}} name="Rank">
