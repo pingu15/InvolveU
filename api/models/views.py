@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import Http404
-from django.core.exceptions import PermissionDenied
+from django.shortcuts import redirect
 
 from .models import Event
 from accounts.models import User
@@ -12,7 +12,7 @@ from datetime import datetime
 
 def edit_events(request, id):
     if not request.user.is_authenticated or (not request.user.is_staff):
-        raise PermissionDenied
+        return redirect('%s?next=%s' % ('/admin/', request.path))
     event = Event.objects.filter(code=id).first()
     if not event:
         raise Http404
