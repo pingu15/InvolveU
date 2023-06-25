@@ -44,9 +44,24 @@ export default function HomeScreen({ navigation }) {
   grade.sort(function (a, b) {
     return a.points > b.points ? -1 : 1;
   });
-  let idx = grade.indexOf(user);
-  let allGradesIdx = allGrades.indexOf(user);
-
+  allGrades.sort(function (a, b) {
+    return a.points > b.points ? -1 : 1;
+  });
+  let idx = -1;
+  for (let i = 0; i < grade.length; ++i) {
+    if (grade[i].id === user.id) {
+      idx = i;
+      break;
+    }
+  }
+  let allGradesIdx = -1;
+  for (let i = 0; i < allGrades.length; ++i) {
+    if (allGrades[i].id === user.id) {
+      allGradesIdx = i;
+      break;
+    }
+  }
+  
   return (
     <View style={styles.container}>
       <ScrollViewWrapper
