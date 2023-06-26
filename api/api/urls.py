@@ -37,7 +37,7 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('models/', include('models.urls')),
+    path('media/', include('models.urls')),
     path('events/', include('models.urls')),
     path("signup/", include('accounts.urls')),
     path('winners/', winners_view, name='winners_view'),
