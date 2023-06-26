@@ -8,6 +8,14 @@ import { useDispatch } from "react-redux";
 import { setItemsData, setUsersData, setEventsData, setUserData } from "../utils/ReduxStore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+/**
+ * ScrollView wrapper with pull-to-reload feature. Wrap screens requiring this feature
+ * by placing all child components of the screen inside this view.
+ * 
+ * @param {Object} children child elements of the screen component
+ * @param {Object} contentContainerStyle styling of the ScrollView that wraps the screen
+ * @returns {JSX.Element} The screen, wrapped in a ScrollViewWrapper
+ */
 export default function ScrollViewWrapper({ children, contentContainerStyle }) {
     const dispatch = useDispatch();    
     const [refreshing, setRefreshing] = useState(false);
