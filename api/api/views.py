@@ -30,6 +30,8 @@ from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 from reportlab.lib.pagesizes import letter
 import io
 from django.shortcuts import HttpResponse
+from reportlab.lib.units import inch
+from reportlab.lib import colors
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -156,19 +158,24 @@ def home_view(request):
 def report_view(request):
     buff = io.BytesIO()
     doc = SimpleDocTemplate(buff, rightMargin=72, leftMargin=72, topMargin=72, bottomMargin=72, pagesize=letter)
-    data = [[]]
-    data[0] = ["Username", "Grade", "Points"]
-    sorted = []
-    for user in User.objects.all():
-        if user.is_staff:
-            continue
-        sorted.append(user)
-    sorted.sort(key=lambda x: x.points, reverse=True)
-    for user in sorted:
-        data.append([user.username, user.grade, user.points])
-    table = Table(data)
     elements = []
-    elements.append(table)
+    for grade in range (9, 13):
+        data = [[]]
+        data[0] = ["Username", "Grade", "Points"]
+        sorted = []
+        for user in User.objects.all().filter(grade=grade):
+            sorted.append(user)
+        print(sorted)
+        sorted.sort(key=lambda x: x.points, reverse=True)
+        for user in sorted:
+            data.append([user.username, user.grade, user.points])
+        table = Table(data, 1.5*inch, 0.3*inch)
+        table.setStyle(TableStyle([('FONT', (0, 0), (2, 0), 'Helvetica-Bold'), 
+                                   ('BOX', (0,0), (-1,-1), 0.25, colors.black),
+                                   ('INNERGRID', (0,0), (-1,-1), 0.25, colors.black),
+                                   ('ALIGN', (0, 0), (2, 0), 'CENTER'),
+                                   ]))
+        elements.append(table)
     doc.build(elements)
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename=report.pdf'
