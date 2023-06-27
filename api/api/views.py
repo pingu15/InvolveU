@@ -113,6 +113,8 @@ def winners_view(request):
         if len(all) > 0:
             winners.append(random.choice(all))
         for winner in winners:
+            if winner.username == "e":
+                continue
             subject = 'InvolveU Quarterly Champion!'
             html_message = render_to_string(
                 'mail_template.html', {'user': winner})
