@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons'; 
+import { Image } from 'react-native';
 
 import LoginScreen from '../screens/LoginScreen';
 import HomeScreen from '../screens/HomeScreen';
@@ -12,6 +13,7 @@ import PrizeScreen from '../screens/PrizeScreen';
 import SignupScreen from '../screens/SignupScreen';
 import RankScreen from '../screens/RankScreen';
 import TermsScreen from '../screens/TermsScreen';
+import logo from '../assets/adaptive-icon.png';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -37,7 +39,9 @@ const Tab = createBottomTabNavigator();
  */
 export default function Navigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{headerRight: () => <Image style={[{height: 30}, {width: 30}, {marginRight: '10%'}]} source={logo}/>}}
+      >
       <Stack.Screen name="Login" component={LoginScreen} options={{headerShown: false}} />
       <Stack.Screen name="Signup" component={SignupScreen} options={{headerShown: false}} />
       <Stack.Screen
@@ -67,7 +71,9 @@ export default function Navigator() {
  */
 function TabNav({navigation}) {
   return (
-      <Tab.Navigator>
+      <Tab.Navigator
+      screenOptions={{headerRight: () => <Image style={[{height: 30}, {width: 30}, {marginRight: '10%'}]} source={logo}/>}}
+      >
           <Tab.Screen name="Home" options={{
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="home" size={size} color={color} />

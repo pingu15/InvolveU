@@ -170,7 +170,7 @@ function Rank({
 function Prize({ navigation }) {
   return (
     <TouchableOpacity
-      style={[styles.box, { height: "12%" }, { marginTop: "0%" }]}
+      style={[styles.box, { height: "10%" }, { marginTop: "0%" }]}
       onPress={() => navigation.navigate("Prizes")}
     >
       <View style={styles.rank}>
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
   h1: {
     fontSize: 25,
     fontWeight: "bold",
-    marginBottom: "10%",
+    marginBottom: "8%",
     color: "#1D1E25",
     marginTop: "5%",
   },
@@ -252,6 +252,7 @@ const styles = StyleSheet.create({
     height: 36,
     width: 36,
     margin: "5%",
+    marginTop: "4.5%",
   },
   arrow: {
     marginTop: "5%",

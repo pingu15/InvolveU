@@ -7,6 +7,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  Image
 } from "react-native";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +16,7 @@ import {
   setUserData,
 } from "../utils/ReduxStore";
 import { GetRefreshToken } from "../utils/InvolveUApi";
+import banner from '../assets/banner.jpg';
 
 /**
  * The login screen allows the user to login to their account.
@@ -145,6 +147,15 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <Image style = {[{height: 80}, {width: 150}, {alignSelf: "center"}, {marginTop: "10%"}]} source = {banner}/>
+      <View
+        style={{
+        borderBottomColor: 'black',
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        width: "70%",
+        alignSelf: "center"
+      }}
+      />
       <View style={styles.titlecontainer}>
         <Text
           style={{
@@ -233,7 +244,7 @@ const styles = StyleSheet.create({
     height: "10%",
     width: "90%",
     marginHorizontal: "5%",
-    marginTop: "20%",
+    marginTop: "5%",
   },
   inputcontainer: {
     height: "40%",

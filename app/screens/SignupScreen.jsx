@@ -17,7 +17,9 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  Image
 } from "react-native";
+import banner from '../assets/banner.jpg';
 
 /**
  * The signup screen allows the user to create a new account.
@@ -161,6 +163,15 @@ export default function SignupScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <Image style = {[{height: 80}, {width: 150}, {alignSelf: "center"}, {marginTop: "10%"}]} source = {banner}/>
+      <View
+        style={{
+        borderBottomColor: 'black',
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        width: "70%",
+        alignSelf: "center"
+      }}
+      />
       <View style={styles.titlecontainer}>
         <Text
           style={{
@@ -299,13 +310,13 @@ const styles = StyleSheet.create({
     height: "10%",
     width: "90%",
     marginHorizontal: "5%",
-    marginTop: "20%",
+    marginTop: "5%",
   },
   inputcontainer: {
     height: "50%",
     width: "90%",
     marginHorizontal: "5%",
-    marginTop: "5%",
+    marginTop: "3%",
   },
   bottomcontainer: {
     height: "20%",
@@ -339,7 +350,7 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
     borderRadius: 4,
     padding: "4%",
-    marginBottom: "5%",
+    marginBottom: "2%",
     width: "99%",
     backgroundColor: "white",
   },
