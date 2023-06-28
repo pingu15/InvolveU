@@ -41,7 +41,6 @@ export default function LoginScreen({ navigation }) {
       if (username == null) return;
       AsyncStorage.getItem("@refreshtoken").then((refreshtoken) => {
         if (refreshtoken == null) return;
-        console.log("r:" + refreshtoken);
         GetRefreshToken(refreshtoken).then((val) => {
           if (val.detail) {
             AsyncStorage.clear();
