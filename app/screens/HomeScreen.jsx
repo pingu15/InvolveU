@@ -136,7 +136,7 @@ function Rank({
       style={[styles.box, { height: "44%" }, { marginTop: "0%" }]}
       onPress={() => navigation.navigate("Rank")}
     >
-      <View style={styles.rank}>
+      <View style={styles.row}>
         <Image style={styles.icon} source={RankIcon} />
         <Text style={styles.h1}>Rank</Text>
         <MaterialIcons
@@ -173,14 +173,14 @@ function Prize({ navigation }) {
       style={[styles.box, { height: "10%" }, { marginTop: "0%" }]}
       onPress={() => navigation.navigate("Prizes")}
     >
-      <View style={styles.rank}>
+      <View style={styles.row}>
         <Image style={styles.icon} source={StoreIcon} />
         <Text style={styles.h1}>Prizes</Text>
         <MaterialIcons
           name="keyboard-arrow-right"
           size={30}
           color="black"
-          style={styles.arrow}
+          style={[styles.arrow, {marginLeft: "47%"}]}
         />
       </View>
     </TouchableOpacity>
@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: "8%",
     color: "#1D1E25",
-    marginTop: "5%",
+    marginTop: "6%",
   },
   text: {
     fontSize: 14,
@@ -257,9 +257,5 @@ const styles = StyleSheet.create({
   arrow: {
     marginTop: "5%",
     marginLeft: "50%",
-  },
-  rank: {
-    flexDirection: "row",
-    width: "100%",
   },
 });

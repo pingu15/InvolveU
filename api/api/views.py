@@ -161,7 +161,8 @@ def report_view(request):
     elements = []
     for grade in range (9, 13):
         data = [[]]
-        data[0] = ["Username", "Grade", "Points"]
+        if grade == 9:
+            data[0] = ["Username", "Grade", "Points"]
         sorted = []
         for user in User.objects.all().filter(grade=grade):
             sorted.append(user)

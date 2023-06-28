@@ -9,7 +9,6 @@ import { setItemsData, setUsersData, setEventsData } from "./ReduxStore";
  * @returns {boolean} True if the data has been loaded, false otherwise
  */
 export default function loadResources() {
-  console.log("loadingResources");
   const [doneLoading, setLoading] = React.useState(false);
   const dispatch = useDispatch();
   if (doneLoading) return true;
@@ -29,7 +28,6 @@ export default function loadResources() {
     })
     .catch((err) => console.log(err))
     .then(() => {
-      console.log("done loading");
       setLoading(true);
     });
   return doneLoading;
