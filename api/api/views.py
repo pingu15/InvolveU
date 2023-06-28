@@ -87,7 +87,7 @@ def winners_view(request):
     else:
         context['loginMessage'] = "Logged in as " + request.user.username
     if len(LastWinner.objects.all()) > 0:
-        delta = datetime.now()-LastWinner.objects.all()[0].date
+        delta = datetime.now(timezone.utc)-LastWinner.objects.all()[0].date
         context['date'] = delta.days
     else:
         context['date'] = 0
@@ -123,7 +123,7 @@ def winners_view(request):
                            [to], html_message=html_message)
             context["message"] = "winners have been notified!"
             LastWinner.objects.all().delete()
-            lw = LastWinner(date=datetime.now())
+            lw = LastWinner(date=datetime.now(timezone.utc))
             lw.save()
         for user in all:
             if datetime.now().month == 6:
