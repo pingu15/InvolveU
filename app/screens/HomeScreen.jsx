@@ -170,7 +170,7 @@ function Rank({
 function Prize({ navigation }) {
   return (
     <TouchableOpacity
-      style={[styles.box, { height: "10%" }, { marginTop: "0%" }]}
+      style={[styles.box, { marginTop: "0%" }]}
       onPress={() => navigation.navigate("Prizes")}
     >
       <View style={styles.row}>
