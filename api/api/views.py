@@ -97,7 +97,7 @@ def winners_view(request):
         gr11 = User.objects.all().filter(grade=11)
         gr10 = User.objects.all().filter(grade=10)
         gr9 = User.objects.all().filter(grade=9)
-        all = User.objects.all()
+        all = User.objects.all().filter(is_staff=False)
         w12 = f(gr12)
         for w in w12:
             winners.append(w)
