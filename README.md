@@ -4,7 +4,7 @@ InvolveU is a mobile app written in React Native that allows students to see upc
 
 Teachers in the school are tasked with adding students by username at each event to ensure validity.
 
-The initial app design can be found on [Figma](https://www.figma.com/file/204M6ZpTg2ZjOxQPPir3OP/InvolveU).
+If you're interested in the UI, the approximate design can be found on [Figma](https://www.figma.com/file/204M6ZpTg2ZjOxQPPir3OP/InvolveU).
 
 ## Api/Docs
 
